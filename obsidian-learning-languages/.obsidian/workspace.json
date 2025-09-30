@@ -96,7 +96,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 238.5
+    "width": 225.5
   },
   "right": {
     "id": "1ecda9ddff046de8",
@@ -198,7 +198,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "3422152d58b48b4f",
+  "active": "545248691352677a",
   "lastOpenFiles": [
     "sandbox.md",
     "Welcome.md"

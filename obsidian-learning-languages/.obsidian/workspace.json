@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "e595052b565d033d",
+        "id": "ae2a4ed3e7f3db2b",
         "type": "tabs",
         "children": [
           {
-            "id": "819a852b21d46327",
+            "id": "5665e9559c2fedb7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "sandbox.md",
+                "file": "service/sandbox.md",
                 "mode": "preview",
                 "source": false
               },
@@ -96,7 +96,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 263.5
+    "width": 263.5,
+    "collapsed": true
   },
   "right": {
     "id": "1ecda9ddff046de8",
@@ -195,14 +196,17 @@
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
       "templater-obsidian:Templater": false,
-      "omnisearch:Omnisearch": false
+      "omnisearch:Omnisearch": false,
+      "homepage:Open homepage": false
     }
   },
-  "active": "545248691352677a",
+  "active": "5665e9559c2fedb7",
   "lastOpenFiles": [
-    "service/baners/crayons.jpg",
+    "service/sandbox.md",
+    "service/settings.md",
     "sandbox.md",
     "Home.md",
+    "service/baners/crayons.jpg",
     "service/baners",
     "service",
     "Welcome.md"

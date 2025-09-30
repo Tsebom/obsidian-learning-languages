@@ -3,6 +3,9 @@
   "enabledCssSnippets": [
     "english",
     "widepage",
-    "sandbox"
-  ]
+    "sandbox",
+    "fix_banner",
+    "properties"
+  ],
+  "baseFontSize": 21
 }

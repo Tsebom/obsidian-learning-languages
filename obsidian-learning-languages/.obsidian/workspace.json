@@ -8,7 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3422152d58b48b4f",
+            "id": "819a852b21d46327",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -96,7 +96,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 225.5
+    "width": 263.5
   },
   "right": {
     "id": "1ecda9ddff046de8",
@@ -200,7 +200,11 @@
   },
   "active": "545248691352677a",
   "lastOpenFiles": [
+    "service/baners/crayons.jpg",
     "sandbox.md",
+    "Home.md",
+    "service/baners",
+    "service",
     "Welcome.md"
   ]
 }

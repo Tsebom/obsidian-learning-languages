@@ -16,3 +16,8 @@
 .cm-foldPlaceholder {
   display: none;
 }
+
+.markdown-source-view .inline-title {
+  position: relative;
+	top: -20px !important;
+}

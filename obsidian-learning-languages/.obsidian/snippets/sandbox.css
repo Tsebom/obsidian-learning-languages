@@ -112,6 +112,10 @@
 	align-items: center;
 }
 
+.word-row-container-active {
+	border: 1px solid var(--text-title-h1);
+}
+
 .word-row-container:hover {
 	color: var(--text-title-h1);
 }

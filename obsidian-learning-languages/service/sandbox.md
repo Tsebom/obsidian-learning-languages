@@ -5,125 +5,6 @@ banner_y: 0.49333
 banner_lock: true
 banner: "![[crayons.jpg]]"
 words:
-  - word: ominous
-    statistics:
-      grade: 0
-    translate: зловещий
-    alternatives:
-      - грозный
-      - зловещее
-      - угрожающий
-    definition:
-      audio: ""
-      meanings:
-        - partOfSpeech: adjective
-          definitions:
-            - definition: Of or pertaining to an omen or to omens; being or exhibiting an omen; significant.
-              synonyms: []
-              antonyms: []
-            - definition: Specifically, giving indication of a coming ill; being an evil omen
-              synonyms:
-                - inauspicious
-                - portentous
-                - threatening
-              antonyms: []
-              example: California poll support for Jerry Brown's tax increases has ominous implications for U.S. taxpayers too Los Angeles Times Headline April 25, 2011
-          synonyms:
-            - inauspicious
-            - portentous
-            - threatening
-            - portentous
-            - sinister
-            - threatening
-          antonyms: []
-  - word: sincerely
-    statistics:
-      grade: 0
-    translate: искренне
-    alternatives:
-      - искренно
-      - искреннее
-      - искренним
-    definition:
-      audio: https://api.dictionaryapi.dev/media/pronunciations/en/sincerely-us.mp3
-      meanings:
-        - partOfSpeech: adverb
-          definitions:
-            - definition: In a sincere or earnest manner; honestly.
-              synonyms: []
-              antonyms: []
-              example: I sincerely hope they make it home safely.
-            - definition: A conventional formula for ending a letter, used when the salutation addresses the person for whom the letter is intended by his or her name.
-              synonyms: []
-              antonyms: []
-          synonyms:
-            - best regards
-            - regards
-            - sincerely yours
-            - yours sincerely
-            - yours truly
-            - earnestly
-            - genuinely
-            - honestly
-            - truthfully
-          antonyms: []
-  - word: orphan
-    statistics:
-      grade: 0
-    translate: ребенок
-    alternatives:
-      - сирота
-      - слон
-      - сирот
-    definition:
-      audio: https://api.dictionaryapi.dev/media/pronunciations/en/orphan-us.mp3
-      meanings:
-        - partOfSpeech: noun
-          definitions:
-            - definition: A person, especially a minor, both or (rarely) one of whose parents have died.
-              synonyms: []
-              antonyms: []
-            - definition: A person, especially a minor, whose parents have permanently abandoned them.
-              synonyms: []
-              antonyms: []
-            - definition: A young animal with no mother.
-              synonyms: []
-              antonyms: []
-            - definition: Anything that is unsupported, as by its source, provider or caretaker, by reason of the supporter's demise or decision to abandon.
-              synonyms: []
-              antonyms: []
-            - definition: A single line of type, beginning a paragraph, at the bottom of a column or page.
-              synonyms: []
-              antonyms: []
-            - definition: Any unreferenced object.
-              synonyms: []
-              antonyms: []
-          synonyms: []
-          antonyms: []
-        - partOfSpeech: verb
-          definitions:
-            - definition: To deprive of parents (used almost exclusively in the passive)
-              synonyms: []
-              antonyms: []
-              example: What do you do when you come across two orphaned polar bear cubs?
-            - definition: To make unavailable, as by removing the last remaining pointer or reference to.
-              synonyms: []
-              antonyms: []
-              example: Removing categories orphans pages from the main category tree.
-          synonyms: []
-          antonyms: []
-        - partOfSpeech: adjective
-          definitions:
-            - definition: Deprived of parents (also orphaned).
-              synonyms: []
-              antonyms: []
-              example: She is an orphan child.
-            - definition: (by extension) Remaining after the removal of some form of support.
-              synonyms: []
-              antonyms: []
-              example: With its government funding curtailed, the gun registry became an orphan program.
-          synonyms: []
-          antonyms: []
   - word: house
     statistics:
       grade: 0
@@ -201,147 +82,9 @@ words:
             - shop
             - shop
           antonyms: []
-  - word: rate
-    statistics:
-      rate: 0
-    translate: ставка
-    alternatives:
-      - ставки
-      - норма
-      - размер
-    definition:
-      audio: https://api.dictionaryapi.dev/media/pronunciations/en/rate-us.mp3
-      meanings:
-        - partOfSpeech: noun
-          definitions:
-            - definition: The worth of something; value.
-              synonyms: []
-              antonyms: []
-            - definition: The proportional relationship between one amount, value etc. and another.
-              synonyms: []
-              antonyms: []
-              example: At the height of his powers, he was producing pictures at the rate of four a year.
-            - definition: Speed.
-              synonyms: []
-              antonyms: []
-              example: The car was speeding down here at a hell of a rate.
-            - definition: The relative speed of change or progress.
-              synonyms: []
-              antonyms: []
-              example: The rate of production at the factory is skyrocketing.
-            - definition: The price of (an individual) thing; cost.
-              synonyms: []
-              antonyms: []
-              example: He asked quite a rate to take me to the airport.
-            - definition: A set price or charge for all examples of a given case, commodity, service etc.
-              synonyms: []
-              antonyms: []
-              example: Postal rates here are low.
-            - definition: A wage calculated in relation to a unit of time.
-              synonyms: []
-              antonyms: []
-              example: We pay an hourly rate of between $10 – $15 per hour depending on qualifications and experience.
-            - definition: Any of various taxes, especially those levied by a local authority.
-              synonyms: []
-              antonyms: []
-              example: I hardly have enough left every month to pay the rates.
-            - definition: A class into which ships were assigned based on condition, size etc.; by extension, rank.
-              synonyms: []
-              antonyms: []
-              example: This textbook is first-rate.
-            - definition: Established portion or measure; fixed allowance; ration.
-              synonyms: []
-              antonyms: []
-            - definition: Order; arrangement.
-              synonyms: []
-              antonyms: []
-            - definition: Ratification; approval.
-              synonyms: []
-              antonyms: []
-            - definition: The gain or loss of a timepiece in a unit of time.
-              synonyms: []
-              antonyms: []
-              example: daily rate; hourly rate; etc.
-          synonyms: []
-          antonyms: []
-        - partOfSpeech: verb
-          definitions:
-            - definition: To assign or be assigned a particular rank or level.
-              synonyms: []
-              antonyms: []
-              example: She is rated fourth in the country.
-            - definition: To evaluate or estimate the value of.
-              synonyms: []
-              antonyms: []
-              example: They rate his talents highly.
-            - definition: To consider or regard.
-              synonyms: []
-              antonyms: []
-              example: He rated this book brilliant.
-            - definition: To deserve; to be worth.
-              synonyms: []
-              antonyms: []
-              example: The view here hardly rates a mention in the travel guide.
-            - definition: To determine the limits of safe functioning for a machine or electrical device.
-              synonyms: []
-              antonyms: []
-              example: The transformer is rated at 10 watts.
-            - definition: To evaluate a property's value for the purposes of local taxation.
-              synonyms: []
-              antonyms: []
-            - definition: To like; to think highly of.
-              synonyms: []
-              antonyms: []
-              example: The customers don't rate the new burgers.
-            - definition: To have position (in a certain class).
-              synonyms: []
-              antonyms: []
-              example: He rates as the best cyclist in the country.
-            - definition: To have value or standing.
-              synonyms: []
-              antonyms: []
-              example: This last performance of hers didn't rate very high with the judges.
-            - definition: To ratify.
-              synonyms: []
-              antonyms: []
-            - definition: To ascertain the exact rate of the gain or loss of (a chronometer) as compared with true time.
-              synonyms: []
-              antonyms: []
-          synonyms:
-            - rank
-          antonyms: []
-  - word: vortex
-    statistics: {}
-    translate: вихрь
-    alternatives:
-      - воронка
-      - вихревой
-      - вихревый
-    definition:
-      audio: https://api.dictionaryapi.dev/media/pronunciations/en/vortex-au.mp3
-      meanings:
-        - partOfSpeech: noun
-          definitions:
-            - definition: A whirlwind, whirlpool, or similarly moving matter in the form of a spiral or column.
-              synonyms: []
-              antonyms: []
-            - definition: Anything that involves constant violent or chaotic activity around some centre.
-              synonyms: []
-              antonyms: []
-              example: "2004: the consumer vortex that is East Hampton — The New Yorker, 30 August 2004, p.38"
-            - definition: Anything that inevitably draws surrounding things into its current.
-              synonyms: []
-              antonyms: []
-            - definition: A supposed collection of particles of very subtle matter, endowed with a rapid rotary motion around an axis which was also the axis of a sun or planet; part of a Cartesian theory accounting for the formation of the universe, and the movements of the bodies composing it.
-              synonyms: []
-              antonyms: []
-            - definition: Any of numerous species of small Turbellaria belonging to Vortex and allied genera.
-              synonyms: []
-              antonyms: []
-          synonyms: []
-          antonyms: []
   - word: dog
-    statistics: {}
+    statistics:
+      grade: 0
     translate: собака
     alternatives:
       - пес
@@ -583,153 +326,6 @@ words:
               antonyms: []
           synonyms: []
           antonyms: []
-  - word: fuck
-    statistics: {}
-    translate: ебать
-    alternatives:
-      - трахаться
-      - блядь
-      - трахать
-    definition:
-      audio: https://api.dictionaryapi.dev/media/pronunciations/en/fuck-uk.mp3
-      meanings:
-        - partOfSpeech: noun
-          definitions:
-            - definition: An act of sexual intercourse.
-              synonyms: []
-              antonyms: []
-            - definition: A sexual partner, especially a casual one.
-              synonyms: []
-              antonyms: []
-            - definition: A highly contemptible person.
-              synonyms:
-                - dickhead
-              antonyms: []
-            - definition: A thing of no value, a small amount.
-              synonyms:
-                - shit
-              antonyms: []
-              example: I don't give a fuck.
-          synonyms:
-            - dickhead
-            - shit
-          antonyms: []
-        - partOfSpeech: verb
-          definitions:
-            - definition: To have sexual intercourse, to copulate.
-              synonyms:
-                - bang
-                - do it
-                - eff
-                - have sex
-                - hump
-                - screw
-                - shag
-              antonyms: []
-              example: Fighting for peace is like fucking for virginity.
-            - definition: To have sexual intercourse with.
-              synonyms:
-                - bang
-                - eff
-                - give someone one
-                - hump
-                - ream
-                - screw
-                - shag
-              antonyms: []
-            - definition: To insert one’s penis, a dildo or other phallic object, into a specified orifice or cleft.
-              synonyms: []
-              antonyms: []
-            - definition: To put in an extremely difficult or impossible situation.
-              synonyms: []
-              antonyms: []
-              example: I'm afraid they're gonna fuck you on this one.
-            - definition: To defraud, deface or otherwise treat badly.
-              synonyms: []
-              antonyms: []
-              example: I got fucked at the used car lot.
-            - definition: Used to express great displeasure with someone or something.
-              synonyms:
-                - bugger
-                - eff
-              antonyms: []
-              example: Fuck those jerks, and fuck their stupid rules!
-            - definition: (usually followed by up) To break, to destroy.
-              synonyms:
-                - annihilate
-                - obliterate
-                - ruin
-              antonyms: []
-            - definition: To make a joke at one's expense; to make fun of in an embarrassing manner.
-              synonyms: []
-              antonyms: []
-            - definition: To throw, to lob something. (angrily)
-              synonyms:
-                - feck
-              antonyms: []
-              example: He fucked the dirty cloth out the window.
-            - definition: To scold
-              synonyms: []
-              antonyms: []
-              example: The sergeant fucked me upside down.
-          synonyms:
-            - annihilate
-            - obliterate
-            - ruin
-            - bang
-            - do it
-            - eff
-            - have sex
-            - hump
-            - screw
-            - shag
-            - bang
-            - eff
-            - give someone one
-            - hump
-            - ream
-            - screw
-            - shag
-            - bugger
-            - eff
-            - feck
-          antonyms: []
-        - partOfSpeech: adverb
-          definitions:
-            - definition: Used as an intensifier for the words "yes" and "no".
-              synonyms:
-                - god
-                - heck
-                - hell
-                - shit
-              antonyms: []
-              example: Do you censor your swearing? – Fuck no.
-          synonyms:
-            - god
-            - heck
-            - hell
-            - shit
-          antonyms: []
-        - partOfSpeech: interjection
-          definitions:
-            - definition: Expressing dismay or discontent.
-              synonyms:
-                - fark
-                - feck
-                - fook
-                - frick
-              antonyms: []
-              example: Fuck! Why do you have to be so difficult all the time?
-            - definition: Expressing surprise.
-              synonyms: []
-              antonyms: []
-              example: Fuck! That movie was good.
-          synonyms:
-            - fark
-            - feck
-            - fook
-            - frick
-          antonyms: []
 phrases:
   - phrase: pitching it in meetings
     translate: ставить его на собраниях
@@ -803,7 +399,7 @@ addWordBtn.addEventListener("click", async () => {
 
 	//Проверка: поле не пустое и только латиница + пробелы
 	if (!text || !/^[A-Za-z][A-Za-z .,;:'"!?-]*$/.test(text)) {
-		setTimeout(() => showToast("Please enter a word or a phrase using only Latin letters"));
+		showToast("Please enter a word or a phrase using only Latin letters");
 		addWordInput.placeholder = "Please enter a word or a phrase using only Latin letters";
 		addWordInput.value = ""; // очищаем поле после alert
 		addWordInput.focus(); // возвращаем фокус к полю ввода
@@ -814,16 +410,22 @@ addWordBtn.addEventListener("click", async () => {
 
 	// Проверка: слово или фраза
 	try {
+		let data;
+
 		if (text.includes(" ")) {
 			const phrasesAttr = "phrases";
 			let translationPhrase = await getTranslation(text);    // вызываем функцию для фраз
-			const updateData = await attributeData(phraseData(text, translationPhrase), phrasesAttr)
+
+			data = phraseData(text, translationPhrase);
+			const updateData = await attributeData(data, phrasesAttr)
 			if (updateData) await writeData(phrasesAttr, updateData);
 		} else {
 			const wordsAttr = "words";
 			let translationWord = await getTranslation(text);        // функция для одиночного слова
 			let definitionWord = await getDefinition(text);   // получаем определение
-			const updateData = await attributeData(wordData(text, translationWord, definitionWord), wordsAttr);
+
+			data = wordData(text, translationWord, definitionWord);
+			const updateData = await attributeData(data, wordsAttr);
 			if (updateData) await writeData(wordsAttr, updateData);
 		}
 	} catch (err) {
@@ -887,7 +489,7 @@ async function getTranslation(text) {
 		} else if (err.message.includes('Translation API error')) {
 			errorMessage = err.message;
 		}
-		setTimeout(() => showToast(errorMessage));
+		showToast(errorMessage);
 		return { 
 			translatedText: "",
 			alternatives: [] 
@@ -913,7 +515,7 @@ async function getDefinition(word) {
 
 		if (!res.ok) {
 			if (res.status === 404) {
-				setTimeout(() => showToast(`Word "${word}" not found in dictionary`));
+				showToast(`Word "${word}" not found in dictionary`);
 				return [];
 			}
 			throw new Error(`Dictionary API error: ${res.status}`);
@@ -923,19 +525,19 @@ async function getDefinition(word) {
 		
 		// Валидация ответа
 		if (!Array.isArray(data)) {
-			setTimeout(() => showToast('Invalid response format from dictionary API'));
+			showToast('Invalid response format from dictionary API');
 			return [];
 		}
 
 		return data;
 	} catch (err) {
-		setTimeout(() => showToast(`Dictionary API error: ${err}`));
+		showToast(`Dictionary API error: ${err}`);
 		
 		// Сообщения об ошибках
 		if (err.name === 'AbortError') {
-			setTimeout(() => showToast('Dictionary API timeout - server is not responding'));
+			showToast('Dictionary API timeout - server is not responding');
 		} else if (err.message.includes('Failed to fetch')) {
-			setTimeout(() => showToast('Cannot connect to dictionary server. Check your internet connection'));
+			showToast('Cannot connect to dictionary server. Check your internet connection');
 		}
 		
 		return [];
@@ -946,7 +548,7 @@ async function getDefinition(word) {
 function wordData(word, libretranslate, definition) {
 	// Валидация входных параметров
 	if (!word || typeof word !== 'string') {
-		setTimeout(() => showToast('Invalid word parameter in wordData'));
+		showToast('Invalid word parameter in wordData');
 		return null;
 	}
 
@@ -985,7 +587,7 @@ function wordData(word, libretranslate, definition) {
 			}
 		}
 	} catch (err) {
-		setTimeout(() => showToast(`Error processing audio URL: ${err}`));
+		showToast(`Error processing audio URL: ${err}`);
 	}
 
 	// Безопасное получение значений
@@ -996,7 +598,7 @@ function wordData(word, libretranslate, definition) {
 			meanings = [];
 		}
 	} catch (err) {
-		setTimeout(() => showToast(`Error processing meanings: ${err}`));
+		showToast(`Error processing meanings: ${err}`);
 	}
 
 	return {
@@ -1017,7 +619,7 @@ function wordData(word, libretranslate, definition) {
 function phraseData(phrase, libretranslate) {
 		// Валидация входных параметров
 		if (!phrase || typeof phrase !== 'string') {
-			setTimeout(() => showToast('Invalid phrase parameter in phraseData'));
+			showToast('Invalid phrase parameter in phraseData');
 			return null;
 		}
 
@@ -1025,7 +627,7 @@ function phraseData(phrase, libretranslate) {
 		const cleanPhrase = phrase.trim();
 		
 		if (!cleanPhrase) {
-			setTimeout(() => showToast('Empty phrase in phraseData'));
+			showToast('Empty phrase in phraseData');
 			return null;
 		}
 
@@ -1039,12 +641,12 @@ function phraseData(phrase, libretranslate) {
 async function attributeData(data, attribute) {
 	// Валидация входных параметров
 	if (!data || typeof data !== "object" || Object.keys(data).length === 0) {
-		setTimeout(() => showToast('Invalid data parameter in attributeData'));
+		showToast('Invalid data parameter in attributeData');
 		return null;
 	}
 
 	if (!attribute || typeof attribute !== 'string') {
-		setTimeout(() => showToast('Invalid attribute parameter in attributeData'));
+		showToast('Invalid attribute parameter in attributeData');
 		return null;
 	}
 
@@ -1056,7 +658,7 @@ async function attributeData(data, attribute) {
 		const keyField = ("word" in data ? "word" : ("phrase" in data ? "phrase" : null));
 		
 		if (!keyField) {
-			setTimeout(() => showToast('Invalid data structure: missing word or phrase field'));
+			showToast('Invalid data structure: missing word or phrase field');
 			return null;
 		}
 
@@ -1071,7 +673,7 @@ async function attributeData(data, attribute) {
 		});
 
 		if (exists) {
-			setTimeout(() => showToast(`"${data[keyField]}" already exists in your ${attribute} list`));
+			showToast(`"${data[keyField]}" already exists in your ${attribute} list`);
 			return null;
 		}
 
@@ -1086,14 +688,10 @@ async function attributeData(data, attribute) {
 		return list;
 
 	} catch (error) {
-		setTimeout(() => showToast(`Error in attributeData: ${err}`));
+		showToast(`Error in attributeData: ${err}`);
 		return null;
 	}
 }
-
-
-/////////////////////////////////////////////////////////////////////
-
 
 //------------------VIEW LAST PHRASE-------------------------
 
@@ -1131,10 +729,14 @@ wordsContainer.className = "words-container";
 wordsContainer.appendChild(createTitle("Words"));
 
 // Упаковываем все слова в контейнер для слов
-let index = 0;
-words.forEach(w => {
-	wordsContainer.appendChild(createWordRow(w, index));
-	index++;
+words.forEach((w, index) => {
+	let row = createRow(w, "words");
+	wordsContainer.appendChild(row);
+
+	if (index === 0) {
+		highlightRow(row);
+	}
+	wordsContainer.appendChild(row);
 });
 
 //------------------VIEW DEFINITION-------------------------------
@@ -1171,10 +773,8 @@ phrasesContainer.className = "phrases-container";
 phrasesContainer.appendChild(createTitle("Phrases"));
 
 // Упаковываем все фразы в контейнер для фраз
-index = 0;
 phrases.forEach(p => {
-	phrasesContainer.appendChild(createPhraseRow(p, index));
-	index++;
+	phrasesContainer.appendChild(createRow(p, "phrases"));
 });
 
 // Упаковываем в общий контейнер
@@ -1200,75 +800,104 @@ function createTitle(title) {
 	return titleContainer
 }
 
-// Создаем строку с данными слова
-function createWordRow(item, index) {
-	const wordItem = item?.word ?? "";
-	const translateItem = item?.translate ?? "";
+function createRow(item, type) {
+	const keyField = type === "words" ? "word" : "phrase";
 
-	const audioUrl = item?.definition?.audio ?? "";
-	const audio = new Audio(audioUrl);
+	const textValue = item?.[keyField] ?? "";
+	const translateValue = item?.translate ?? "";
 
-	// Создаем контейнер данных для слова
-	let wordRowContainer = document.createElement("div");
-	wordRowContainer.className = "word-row-container";
+	// Контейнер строки
+	let rowContainer = document.createElement("div");
+	rowContainer.className = type === "words" ? "word-row-container" : "phrase-row-container";
 
-	wordRowContainer.addEventListener("click", (event) => {
-		let curentTarget = event.currentTarget;
+	// Контейнер для слова или фразы
+	let textContainer = document.createElement("div");
+	textContainer.className = type === "words" ? "word-container" : "phrase-container";
+	textContainer.innerText = textValue;
 
-		const parent = curentTarget.parentElement;
-		const children = Array.from(parent.children);
+	// Контейнер для перевода
+	let translateContainer = document.createElement("div");
+	translateContainer.className = type === "words" ? "word-container" : "phrase-container";
+	translateContainer.innerText = translateValue;
 
-		children.forEach(child => {
-			if (child.className !== "word-title-container") {
-				child.style = "border-bottom: 1px solid var(--text-muted);";
-			}
+	// Кнопка удаления
+	let deleteBtn  = document.createElement("button");
+	deleteBtn.className = type === "words" ? "word-btn word-delete-btn" : "phrase-delete-btn";
+	deleteBtn.textContent = "❌";
+	deleteBtn.addEventListener("click", async () => {
+		const list = type === "words" ? words : phrases;
+		const index = list.findIndex(e => e[keyField].toLowerCase() === textValue.toLowerCase());
+
+		if (index !== -1) {
+			list.splice(index, 1);
+			await writeData(type, list);
+			rowContainer.remove();
+		}
+	});
+
+	// Кнопка аудио
+	if (type === "words") {
+		const audioUrl = item?.definition?.audio ?? "";
+		const audio = new Audio(audioUrl);
+
+		let audioButton = document.createElement("button");
+		audioButton.className = "word-btn word-audio-btn";
+		audioButton.textContent = "🔊";
+		audioButton.addEventListener("click", () => {
+			audio.play();
 		});
 
-		curentTarget.style = "border: 1px solid var(--text-title-h1) !important;";
+		rowContainer.appendChild(audioButton);
 
-		posAndDefinitionContainer.innerHTML = ""; 
-		posAndDefinitionContainer.appendChild(fillDefinition(words[index]));
-	});
- 
-	// Создаем аудио кнопку
-	let audioButton = document.createElement("button");
-	audioButton.className = "word-btn word-audio-btn";
-	audioButton.textContent = "🔊";
-	audioButton.addEventListener("click", () => {
-		audio.play();
-	});
+		rowContainer.addEventListener("click", (event) => {
+			let curentTarget = event.currentTarget;
 
-	// Создаем контейнер для слова + содержимое
-	let word = document.createElement("div");
-	word.className = "word-container";
-	word.innerText = wordItem;
+			if (curentTarget.classList.contains("word-row-container-active") && event.target === deleteBtn) {
+				const next = curentTarget.nextElementSibling;
+				const prev = curentTarget.previousElementSibling;
 
-		// Создаем контейнер для перевода + содержимое
-	let translate = document.createElement("div");
-	translate.className = "word-container";
-	translate.innerText = translateItem;
+				posAndDefinitionContainer.innerHTML = "";
+				if(prev && !prev.classList.contains("word-title-container")) {
+					highlightRow(prev);
+					prev.click();
+					return;
+				} else if(next) {
+					highlightRow(next);
+					next.click();
+					return;
+				}
+			}
 
-	// Создаем кнопку удаления слова
-	let wordDelete = document.createElement("button");
-	wordDelete.className = "word-btn word-delete-btn";
-	wordDelete.textContent = "❌";
-	wordDelete.addEventListener("click", async () => {
-		// Функция для удаления слова
-		words.splice(index, 1);
-		await writeData("words", words);
-	});
+			if (event.target === audioButton || event.target === deleteBtn) {
+				return;
+			}
 
-	// Упаковываем в контейнер для слова
-	wordRowContainer.appendChild(audioButton)
-	wordRowContainer.appendChild(word);
-	wordRowContainer.appendChild(translate);
-	wordRowContainer.appendChild(wordDelete);
+			highlightRow(curentTarget);
 
-	if (index === 0 ) {
-		wordRowContainer.style = "border: 1px solid var(--text-title-h1);";
+			posAndDefinitionContainer.innerHTML = ""; 
+			posAndDefinitionContainer.appendChild(fillDefinition(item));
+		});
+
 	}
 
-	return wordRowContainer;
+	rowContainer.appendChild(textContainer);
+	rowContainer.appendChild(translateContainer);
+	rowContainer.appendChild(deleteBtn);
+
+	return rowContainer;
+}
+
+function highlightRow(row) {
+	const parent = row.parentElement;
+	const children = Array.from(parent.children);
+
+	children.forEach(child => {
+		if (child.classList.contains("word-row-container-active")) {
+			child.classList.remove("word-row-container-active");
+		}
+	});
+
+	row.classList.add("word-row-container-active");
 }
 
 // Получаем meanings из words[index]
@@ -1394,44 +1023,6 @@ function fillDefinition(data) {
 	});
 
 	return partsOfSpeechContainer;
-}
-
-// Создаем строку с данными фразы
-function createPhraseRow(item, index) {
-	const phraseItem = item?.phrase ?? "";
-	const translateItem = item?.translate ?? "";
-
-	// Создаем контейнер данных для фраз
-	let phraseRowContainer = document.createElement("div");
-	phraseRowContainer.className = "phrase-row-container";
-
-	// Создаем контейнер для фразы + содержимое
-	let phrase = document.createElement("div");
-	phrase.className = "phrase-container";
-	phrase.innerText = phraseItem;
-
-	// Создаем контейнер для перевода + содержимое
-	let translate = document.createElement("div");
-	translate.className = "phrase-container";
-	translate.innerText = translateItem;
-
-
-	// Создаем кнопку удаления слова
-	let phraseDelete = document.createElement("button");
-	phraseDelete.className = "phrase-btn phrase-delete-btn";
-	phraseDelete.textContent = "❌";
-	phraseDelete.addEventListener("click", async () => {
-		// Функция для удаления слова
-		phrases.splice(index, 1);
-		await writeData("phrases", phrases);
-	});
-
-	// Упаковываем в контейнер для фраз
-	phraseRowContainer.appendChild(phrase);
-	phraseRowContainer.appendChild(translate);
-	phraseRowContainer.appendChild(phraseDelete);
-
-	return phraseRowContainer;
 }
 
 //------------------FUNCTIONS-------------------------------

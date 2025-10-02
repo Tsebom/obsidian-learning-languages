@@ -355,10 +355,10 @@ async function attributeData(data, attribute) {
 			return null;
 		}
 
-	// Защитимся от пустых объектов и невалидных записей
-	if (!data || typeof data !== "object" || Object.keys(data).length === 0) {
-		return list;
-	}
+		// Защитимся от пустых объектов и невалидных записей
+		if (!data || typeof data !== "object" || Object.keys(data).length === 0) {
+			return list;
+		}
 
 		// Добавляем в начало списка (новые элементы сверху)
 		list.unshift(data);
@@ -366,7 +366,7 @@ async function attributeData(data, attribute) {
 		return list;
 
 	} catch (error) {
-		showToast(`Error in attributeData: ${err}`);
+		showToast(`Error in attributeData: ${error}`);
 		return null;
 	}
 }
@@ -422,7 +422,6 @@ words.forEach((w, index) => {
 	if (index === 0) {
 		highlightRow(row);
 	}
-	wordsContainer.appendChild(row);
 });
 
 //------------------VIEW DEFINITION-------------------------------
@@ -487,31 +486,32 @@ function createTitle(title) {
 }
 
 function createRow(item, type) {
-	const keyField = type === "words" ? "word" : "phrase";
+	const isWord = type === "words";
+	const keyField = isWord ? "word" : "phrase";
 
 	const textValue = item?.[keyField] ?? "";
 	const translateValue = item?.translate ?? "";
 
 	// Контейнер строки
 	let rowContainer = document.createElement("div");
-	rowContainer.className = type === "words" ? "word-row-container" : "phrase-row-container";
+	rowContainer.className = isWord ? "word-row-container" : "phrase-row-container";
 
 	// Контейнер для слова или фразы
 	let textContainer = document.createElement("div");
-	textContainer.className = type === "words" ? "word-container" : "phrase-container";
+	textContainer.className = isWord ? "word-container" : "phrase-container";
 	textContainer.innerText = textValue;
 
 	// Контейнер для перевода
 	let translateContainer = document.createElement("div");
-	translateContainer.className = type === "words" ? "word-container" : "phrase-container";
+	translateContainer.className = isWord ? "word-container" : "phrase-container";
 	translateContainer.innerText = translateValue;
 
 	// Кнопка удаления
 	let deleteBtn  = document.createElement("button");
-	deleteBtn.className = type === "words" ? "word-btn word-delete-btn" : "phrase-delete-btn";
+	deleteBtn.className = isWord ? "word-btn word-delete-btn" : "phrase-delete-btn";
 	deleteBtn.textContent = "❌";
-	deleteBtn.addEventListener("click", async (event) => {
-		const list = type === "words" ? words : phrases;
+	deleteBtn.addEventListener("click", async () => {
+		const list = isWord ? words : phrases;
 		const index = list.findIndex(e => e[keyField].toLowerCase() === textValue.toLowerCase());
 
 		if (index !== -1) {
@@ -520,10 +520,10 @@ function createRow(item, type) {
 			rowContainer.remove();
 		}
 
-		if (type !== "words") {
-			const row = phrasesContainer.getElementsByClassName("phrase-row-container");
-			if (row.length !== 0) {
-				updateLastPhrase(row[0]);
+		if (isWord) {
+			const rows = phrasesContainer.getElementsByClassName("phrase-row-container");
+			if (rows.length !== 0) {
+				updateLastPhrase(rows[0]);
 			} else {
 				lastPhraseSourse.textContent = "";
 				lastPhraseTarget.textContent = "";
@@ -531,12 +531,12 @@ function createRow(item, type) {
 		}
 	});
 
-	// Кнопка аудио
-	if (type === "words") {
+	// Фишки для слов (аудио и обработка клика)
+	if (isWord) {
 		const audioUrl = item?.definition?.audio ?? "";
 		const audio = new Audio(audioUrl);
 
-		let audioButton = document.createElement("button");
+		const audioButton = document.createElement("button");
 		audioButton.className = "word-btn word-audio-btn";
 		audioButton.textContent = "🔊";
 		audioButton.addEventListener("click", () => {
@@ -548,6 +548,7 @@ function createRow(item, type) {
 		rowContainer.addEventListener("click", (event) => {
 			const curentTarget = event.currentTarget;
 
+			// При удалении активного слова переключить активное состояние на соседнее
 			if (curentTarget.classList.contains("word-row-container-active") && event.target === deleteBtn) {
 				const next = curentTarget.nextElementSibling;
 				const prev = curentTarget.previousElementSibling;
@@ -610,12 +611,12 @@ function createPartsOfSpeech(item = words[0]) {
 // Создать параграф для definition
 function appendParagraph(text) {
 	let paragraphContainer = document.createElement("div");
-	paragraphContainer.style = "display: flex; margin-bottom: 5px;";
+	paragraphContainer.className = "paragraph-container";
 
 	let textContainer = document.createElement("div");
 
 	let paragraph = document.createElement("p");
-	paragraph.style = "padding-left: 20px; margin: 0px";
+	paragraph.className = "paragraph-definition";
 	paragraph.textContent = `${text}`;
 
 	let btn = document.createElement("button");
@@ -630,7 +631,7 @@ function appendParagraph(text) {
 			let taranslate = await getTranslation(text);
 
 			let paragraph = document.createElement("p");
-			paragraph.style = "padding-left: 20px; margin: 0px; border-top: 1px dashed var(--text-muted); ";
+			paragraph.className = "paragraph-definition-translate";
 			paragraph.textContent = `${taranslate.translatedText}`;
 
 			textContainer.appendChild(paragraph);
@@ -646,17 +647,17 @@ function appendParagraph(text) {
 // Заполняет данными difinition
 function fillDefinition(data) {
 	// Получаем массив объектов partOfSpeach
-	let partsOfSpeach = createPartsOfSpeech(data);
+	const partsOfSpeach = createPartsOfSpeech(data);
 
-	let partsOfSpeechContainer = document.createElement("div");
+	const partsOfSpeechContainer = document.createElement("div");
 
 	partsOfSpeach.forEach(p => {
 		// Контейнер для части речи
-		let partOfSpeechContainer = document.createElement("div");
+		const partOfSpeechContainer = document.createElement("div");
 		partOfSpeechContainer.className = "partofspeach-container";
 
 		// Часть речи
-		let pos = document.createElement("div");
+		const pos = document.createElement("div");
 		pos.className = "pos";
 		pos.textContent = `${p.partOfSpeech + ":"}`;
 
@@ -664,28 +665,28 @@ function fillDefinition(data) {
 		const definitions = p?.definitions ?? [];
 
 	// Контейнер для всех definitions
-		let definitionsContainer = document.createElement("div");
+		const definitionsContainer = document.createElement("div");
 		definitionsContainer.className = "definitions-container";
 
 		definitions.forEach(d => {
 			// Контейнер для defenitions
-			let definitionContainer = document.createElement("div");
+			const definitionContainer = document.createElement("div");
 			definitionContainer.className = "definition-container";
 
 			// Контейнер для defenition
-			let definition = document.createElement("div");
+			const definition = document.createElement("div");
 			d.definition ? definition.textContent = `definition: ` : "";
 			definition.appendChild(appendParagraph(`${d.definition}`));
 
 			// Контейнер для example
-			let example = document.createElement("div");
+			const example = document.createElement("div");
 			if (d.example) {
 				example.textContent = `example: `;
 				example.appendChild(appendParagraph(`${d.example}`));
 			}
 
 			// Контейнер для synonyms
-			let synonyms = document.createElement("div");
+			const synonyms = document.createElement("div");
 			if (d.synonyms && d.synonyms.length !== 0) {
 				synonyms.textContent = `synonyms: `;
 				d.synonyms.forEach(s => {
@@ -694,7 +695,7 @@ function fillDefinition(data) {
 			}
 
 			// Контейнер для antonyms
-			let antonyms = document.createElement("div");
+			const antonyms = document.createElement("div");
 			if (d.antonyms && d.antonyms.length !== 0) {
 				antonyms.textContent = `antonyms: `;
 				d.antonyms.forEach(a => {

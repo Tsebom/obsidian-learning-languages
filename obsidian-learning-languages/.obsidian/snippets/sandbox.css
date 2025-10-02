@@ -92,6 +92,22 @@
 	margin-bottom: 50px;
 }
 
+.paragraph-container {
+	display: flex; 
+	margin-bottom: 5px;
+}
+
+.paragraph-definition {
+	padding-left: 20px;
+	margin: 0px !important;
+}
+
+.paragraph-definition-translate {
+	padding-left: 20px;
+	margin: 0px !important;
+	border-top: 1px dashed var(--text-muted);
+}
+
 .phrases-container {
 	border-left: 1px solid var(--text-title-h1);
 	border-right: 1px solid var(--text-title-h1);

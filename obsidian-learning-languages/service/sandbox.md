@@ -5,17 +5,7 @@ banner_y: 0.49333
 banner_lock: true
 banner: "![[crayons.jpg]]"
 words: []
-phrases:
-  - phrase: i like you
-    translate: ты мне нравишься
-  - phrase: i am going
-    translate: я собираюсь
-  - phrase: To scold
-    translate: Чтобы ругать
-  - phrase: fuck your ass
-    translate: ебать твою задницу
-  - phrase: hello world
-    translate: привет, мир
+phrases: []
 
 ---
 
@@ -69,6 +59,7 @@ addWordsContainer.appendChild(addWordInput);
 addWordsContainer.appendChild(addWordBtn);
 
 dv.container.appendChild(addWordsContainer);
+addWordInput.focus();
 
 //------------------FUNCTIONS FOR INPUT-------------------------------
 
@@ -96,7 +87,9 @@ addWordBtn.addEventListener("click", async () => {
 			let translationPhrase = await getTranslation(text);    // вызываем функцию для фраз
 
 			data = phraseData(text, translationPhrase);
-			phrasesContainer.insertBefore(createRow(data, phrasesAttr), phrasesContainer.children[1]);
+			let row = createRow(data, phrasesAttr);
+			updateLastPhrase(row);
+			phrasesContainer.insertBefore(row, phrasesContainer.children[1]);
 
 			const updateData = await attributeData(data, phrasesAttr)
 			if (updateData) await writeData(phrasesAttr, updateData);
@@ -401,6 +394,14 @@ lastPhraseContainer.appendChild(lastPhraseTarget);
 let tableContainer = document.createElement("div");
 tableContainer.className = "table-words-container";
 
+// Обновление последней введеной фразы
+function updateLastPhrase(row) {
+	const date = row.getElementsByClassName("phrase-container");
+
+	lastPhraseSourse.textContent = date[0].textContent;
+	lastPhraseTarget.textContent = date[1].textContent;
+}
+
 //------------------VIEW WORDS------------------------------------
 
 // Контейнер для слов и определения выделенного слова
@@ -509,7 +510,7 @@ function createRow(item, type) {
 	let deleteBtn  = document.createElement("button");
 	deleteBtn.className = type === "words" ? "word-btn word-delete-btn" : "phrase-delete-btn";
 	deleteBtn.textContent = "❌";
-	deleteBtn.addEventListener("click", async () => {
+	deleteBtn.addEventListener("click", async (event) => {
 		const list = type === "words" ? words : phrases;
 		const index = list.findIndex(e => e[keyField].toLowerCase() === textValue.toLowerCase());
 
@@ -517,6 +518,16 @@ function createRow(item, type) {
 			list.splice(index, 1);
 			await writeData(type, list);
 			rowContainer.remove();
+		}
+
+		if (type !== "words") {
+			const row = phrasesContainer.getElementsByClassName("phrase-row-container");
+			if (row.length !== 0) {
+				updateLastPhrase(row[0]);
+			} else {
+				lastPhraseSourse.textContent = "";
+				lastPhraseTarget.textContent = "";
+			}		
 		}
 	});
 
@@ -535,7 +546,7 @@ function createRow(item, type) {
 		rowContainer.appendChild(audioButton);
 
 		rowContainer.addEventListener("click", (event) => {
-			let curentTarget = event.currentTarget;
+			const curentTarget = event.currentTarget;
 
 			if (curentTarget.classList.contains("word-row-container-active") && event.target === deleteBtn) {
 				const next = curentTarget.nextElementSibling;

@@ -1,7 +1,7 @@
 ---
 banner: "![[settings.jpg]]"
 maxgrade: "30"
-libretranslateURL: http://localhost:5000/translate
+libretranslateHost: localhost:5000
 API_KEY:
 banner_lock: true
 banner_y: 0.65

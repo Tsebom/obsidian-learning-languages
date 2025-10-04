@@ -20,38 +20,182 @@ phrases: []
 # DataviewJS
 
 ```dataviewjs
+
+//------------------CUSTOM ALERT-------------------------------
+
+const toastContainer = document.createElement("div");
+toastContainer.style.position = "fixed";
+toastContainer.style.top = "50%";
+toastContainer.style.left = "50%";
+toastContainer.style.transform = "translate(-50%, -50%)";
+toastContainer.style.display = "flex";
+toastContainer.style.flexDirection = "column";
+toastContainer.style.gap = "10px";
+toastContainer.style.zIndex = "9999";
+document.body.appendChild(toastContainer);
+
+function showToast(message, duration = 3000) {
+  const toast = document.createElement("div");
+  toast.textContent = message;
+
+  // Стили для тоста
+  toast.style.background = "#333";
+	toast.style.fontSize= "30px";
+  toast.style.color = "#ff0000";
+  toast.style.padding = "20px 25px";
+  toast.style.borderRadius = "10px";
+  toast.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
+  toast.style.fontFamily = "sans-serif";
+  toast.style.opacity = "0";
+  toast.style.transform = "translateY(-20px)";
+  toast.style.transition = "opacity 0.3s, transform 0.3s";
+
+  toastContainer.appendChild(toast);
+
+  // плавное появление
+  requestAnimationFrame(() => {
+    toast.style.opacity = "1";
+    toast.style.transform = "translateY(0)";
+  });
+
+  // скрытие через duration
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateY(-20px)";
+    setTimeout(() => toast.remove(), 300);
+  }, duration);
+}
+
+//----------------------------------------------------------
+
 // Получаем настройки
 const setting = dv.page("service/settings");
 
 const container = this.container;
 const meta = app.plugins.plugins["metaedit"].api;
 
-const libretranslateURL = setting.libretranslateURL;
+const libretranslateURL = `http://${setting.libretranslateHost}/translate`;
 const API_KEY = setting.API_KEY;
 
 // Получаем активный файл (скрипт запускается из него же)
-const file = app.workspace.getActiveFile();
+const file = app.vault.getAbstractFileByPath("service/Data.md");
 
 // Получаем массив объектов со словами
-const words = await readData("words");
+const words = await readData("words"); 
 
 // Получаем массив объектов с фразами
 const phrases = await readData("phrases");
 
+//----------------------QUIZ VIEW---------------------------------
+
+const quizContainer = document.createElement("div");
+quizContainer.className = "quiz-container"; 
+
+const questionContainer = document.createElement("div");
+questionContainer.className = "question-container"; 
+
+const questionWord = document.createElement("div");
+questionWord.className = "question-word";
+
+const answerContainer = document.createElement("div");
+answerContainer.className = "answer-container"; 
+
+quizContainer.appendChild(questionContainer);
+questionContainer.appendChild(questionWord);
+
+quizContainer.appendChild(questionContainer);
+quizContainer.appendChild(answerContainer);
+
+dv.container.appendChild(quizContainer);
+
+// Список слов для изучения
+const wordList = () => {
+	const list = [];
+
+	words.forEach(w => {
+		list.unshift(w.word);
+	});
+
+	return list;
+};
+
+quizLoop();
+
+//--------------------QUIZ LOGIC---------------------------------
+
+function quizLoop() {
+	const answerWords = getRandomWords(wordList(), 4);
+	const questionedWord = getRandomWords(answerWords, 1);
+
+	const questionedWordObject = words.find(w => w.word === questionedWord[0])
+	const questionedWordTranslate = questionedWordObject?.translate;
+	const statistic = questionedWordObject.statistics;
+	const grade = statistic.grade;
+
+	questionWord.innerText = questionedWordTranslate;
+
+	answerWords.forEach(word => {
+		const answerBtn = document.createElement("button");
+		answerBtn.textContent = word;
+
+		answerBtn.addEventListener("click", (event) => {
+			const answeredWord = event.currentTarget.textContent;
+
+			if (answeredWord === questionedWord[0]) {
+				answerBtn.style = "background-color: green;";
+				statistic.grade = grade + 1;
+				
+			} else {
+				answerBtn.style = "background-color: red;";
+				if (grade > 0) {
+					statistic.grade = grade - 1;
+				}
+			}
+
+			setTimeout(() => {
+				writeData("words", words);
+				//questionWord.innerHTML = "";
+				//answerContainer.innerHTML = "";
+				//quizLoop();
+			}, 0);
+		});
+
+		answerContainer.appendChild(answerBtn);
+	});
+}
+
+
+//------------------QUIZ FUNCTIONS-------------------------------
+
+// Получаем лист случайных слов
+function getRandomWords(arr, count) {
+	const list = [];
+
+	while(list.length < count) {
+		let randomElement = arr[Math.floor(Math.random() * arr.length)];
+
+		if (!list.includes(randomElement)) {
+			list.unshift(randomElement);
+		}
+	}
+
+	return list;
+}
+
 //------------------VIEW FOR INPUT-------------------------------
 
 // Контейнер для блока добавления слов
-let addWordsContainer = document.createElement("div");
+const addWordsContainer = document.createElement("div");
 addWordsContainer.className = "words-add-container"; 
 
 // Поле input для ввода слова или фразы
-let addWordInput = document.createElement("input");
+const addWordInput = document.createElement("input");
 addWordInput.className = "word-add-input";
 addWordInput.type = "text";
 addWordInput.placeholder = "Word/Phrase";
 
 // Кнопка добавления слова или фразы
-let addWordBtn = document.createElement("button");
+const addWordBtn = document.createElement("button");
 addWordBtn.className = "word-add-btn";
 addWordBtn.textContent = "Add";
 
@@ -373,13 +517,13 @@ async function attributeData(data, attribute) {
 
 //------------------VIEW LAST PHRASE-------------------------
 
-let lastPhraseContainer = document.createElement("div");
+const lastPhraseContainer = document.createElement("div");
 lastPhraseContainer.className = "last-phrase-container";
 
-let lastPhraseSourse = document.createElement("div");
+const lastPhraseSourse = document.createElement("div");
 lastPhraseSourse.className = "last-phrase-sourse";
 
-let lastPhraseTarget = document.createElement("div");
+const lastPhraseTarget = document.createElement("div");
 lastPhraseTarget.className = "last-phrase-target";
 
 if (phrases && phrases.length > 0) {
@@ -391,7 +535,7 @@ lastPhraseContainer.appendChild(lastPhraseSourse);
 lastPhraseContainer.appendChild(lastPhraseTarget);
 
 // Контейнер для таблицы слов и фраз
-let tableContainer = document.createElement("div");
+const tableContainer = document.createElement("div");
 tableContainer.className = "table-words-container";
 
 // Обновление последней введеной фразы
@@ -405,18 +549,18 @@ function updateLastPhrase(row) {
 //------------------VIEW WORDS------------------------------------
 
 // Контейнер для слов и определения выделенного слова
-let wordsInfoContainer = document.createElement("div");
+const wordsInfoContainer = document.createElement("div");
 wordsInfoContainer.className = "words-info-container";
 
 // Контейнер для слов
-let wordsContainer = document.createElement("div");
+const wordsContainer = document.createElement("div");
 wordsContainer.className = "words-container"; 
 
 wordsContainer.appendChild(createTitle("Words"));
 
 // Упаковываем все слова в контейнер для слов
 words.forEach((w, index) => {
-	let row = createRow(w, "words");
+	const row = createRow(w, "words");
 	wordsContainer.appendChild(row);
 
 	if (index === 0) {
@@ -427,14 +571,14 @@ words.forEach((w, index) => {
 //------------------VIEW DEFINITION-------------------------------
 
 // Контейнер для определения выбранного слова
-let wordDefinitionContainer = document.createElement("div");
+const wordDefinitionContainer = document.createElement("div");
 wordDefinitionContainer.className = "word-definition-container";
 
 // Добавляем title difinition
 wordDefinitionContainer.appendChild(createTitle("Definition"));
 
 // Контейнер для partOfSpeach и definition
-let posAndDefinitionContainer = document.createElement("div");
+const posAndDefinitionContainer = document.createElement("div");
 posAndDefinitionContainer.className = "pos-and-definition-container";
 
 posAndDefinitionContainer.appendChild(fillDefinition(words[0]));
@@ -452,7 +596,7 @@ tableContainer.appendChild(wordsInfoContainer);
 //------------------VIEW PHRASES--------------------------------
 
 // Контейнер для фраз
-let phrasesContainer = document.createElement("div");
+const phrasesContainer = document.createElement("div");
 phrasesContainer.className = "phrases-container"; 
 
 phrasesContainer.appendChild(createTitle("Phrases"));
@@ -473,10 +617,10 @@ dv.container.appendChild(tableContainer);
 
 // Создаем заголовок
 function createTitle(title) {
-	let titleContainer = document.createElement("div");
+	const titleContainer = document.createElement("div");
 	titleContainer.className = "word-title-container";
 
-	let titleContent = document.createElement("h1");
+	const titleContent = document.createElement("h1");
 	titleContent.className = "word-title";
 	titleContent.textContent = `${title}`;
 
@@ -493,21 +637,21 @@ function createRow(item, type) {
 	const translateValue = item?.translate ?? "";
 
 	// Контейнер строки
-	let rowContainer = document.createElement("div");
+	const rowContainer = document.createElement("div");
 	rowContainer.className = isWord ? "word-row-container" : "phrase-row-container";
 
 	// Контейнер для слова или фразы
-	let textContainer = document.createElement("div");
+	const textContainer = document.createElement("div");
 	textContainer.className = isWord ? "word-container" : "phrase-container";
 	textContainer.innerText = textValue;
 
 	// Контейнер для перевода
-	let translateContainer = document.createElement("div");
+	const translateContainer = document.createElement("div");
 	translateContainer.className = isWord ? "word-container" : "phrase-container";
 	translateContainer.innerText = translateValue;
 
 	// Кнопка удаления
-	let deleteBtn  = document.createElement("button");
+	const deleteBtn  = document.createElement("button");
 	deleteBtn.className = isWord ? "word-btn word-delete-btn" : "phrase-delete-btn";
 	deleteBtn.textContent = "❌";
 	deleteBtn.addEventListener("click", async () => {
@@ -610,16 +754,16 @@ function createPartsOfSpeech(item = words[0]) {
 
 // Создать параграф для definition
 function appendParagraph(text) {
-	let paragraphContainer = document.createElement("div");
+	const paragraphContainer = document.createElement("div");
 	paragraphContainer.className = "paragraph-container";
 
-	let textContainer = document.createElement("div");
+	const textContainer = document.createElement("div");
 
-	let paragraph = document.createElement("p");
+	const paragraph = document.createElement("p");
 	paragraph.className = "paragraph-definition";
 	paragraph.textContent = `${text}`;
 
-	let btn = document.createElement("button");
+	const btn = document.createElement("button");
 	btn.textContent = "Translate";
 
 	textContainer.appendChild(paragraph);
@@ -630,7 +774,7 @@ function appendParagraph(text) {
 			click = 0;
 			let taranslate = await getTranslation(text);
 
-			let paragraph = document.createElement("p");
+			const paragraph = document.createElement("p");
 			paragraph.className = "paragraph-definition-translate";
 			paragraph.textContent = `${taranslate.translatedText}`;
 
@@ -722,7 +866,7 @@ function fillDefinition(data) {
 	return partsOfSpeechContainer;
 }
 
-//------------------FUNCTIONS-------------------------------
+//--------------------FUNCTIONS--------------------------------
 
 // Читает данные из атрибута файла
 async function readData(attribute) {
@@ -740,51 +884,6 @@ async function readData(attribute) {
 // Добавляет данные в атрибут файла
 async function writeData(attribute, data) {
 	await meta.update(attribute, data, file);
-}
-
-//------------------CUSTOM ALERT-------------------------------
-
-const toastContainer = document.createElement("div");
-toastContainer.style.position = "fixed";
-toastContainer.style.top = "50%";
-toastContainer.style.left = "50%";
-toastContainer.style.transform = "translate(-50%, -50%)";
-toastContainer.style.display = "flex";
-toastContainer.style.flexDirection = "column";
-toastContainer.style.gap = "10px";
-toastContainer.style.zIndex = "9999";
-document.body.appendChild(toastContainer);
-
-function showToast(message, duration = 3000) {
-  const toast = document.createElement("div");
-  toast.textContent = message;
-
-  // Стили для тоста
-  toast.style.background = "#333";
-	toast.style.fontSize= "30px";
-  toast.style.color = "#ff0000";
-  toast.style.padding = "20px 25px";
-  toast.style.borderRadius = "10px";
-  toast.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
-  toast.style.fontFamily = "sans-serif";
-  toast.style.opacity = "0";
-  toast.style.transform = "translateY(-20px)";
-  toast.style.transition = "opacity 0.3s, transform 0.3s";
-
-  toastContainer.appendChild(toast);
-
-  // плавное появление
-  requestAnimationFrame(() => {
-    toast.style.opacity = "1";
-    toast.style.transform = "translateY(0)";
-  });
-
-  // скрытие через duration
-  setTimeout(() => {
-    toast.style.opacity = "0";
-    toast.style.transform = "translateY(-20px)";
-    setTimeout(() => toast.remove(), 300);
-  }, duration);
 }
 
 ```

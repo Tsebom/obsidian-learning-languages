@@ -4,8 +4,6 @@ cssclasses:
 banner_y: 0.49333
 banner_lock: true
 banner: "![[crayons.jpg]]"
-words: []
-phrases: []
 
 ---
 
@@ -70,6 +68,7 @@ function showToast(message, duration = 3000) {
 
 // Получаем настройки
 const setting = dv.page("service/settings");
+const maxgrade = setting.maxgrade;
 
 const container = this.container;
 const meta = app.plugins.plugins["metaedit"].api;
@@ -142,11 +141,13 @@ function quizLoop() {
 			const answeredWord = event.currentTarget.textContent;
 
 			if (answeredWord === questionedWord[0]) {
-				answerBtn.style = "background-color: green;";
+				answerBtn.style.backgroundColor = "var(--color-green)";
+				answerBtn.style.color = "black";
 				statistic.grade = grade + 1;
 				
 			} else {
-				answerBtn.style = "background-color: red;";
+				answerBtn.style.backgroundColor = "var(--color-red)";
+				answerBtn.style.color = "black";
 				if (grade > 0) {
 					statistic.grade = grade - 1;
 				}
@@ -677,6 +678,8 @@ function createRow(item, type) {
 
 	// Фишки для слов (аудио и обработка клика)
 	if (isWord) {
+		const grade = item?.statistics.grade;
+
 		const audioUrl = item?.definition?.audio ?? "";
 		const audio = new Audio(audioUrl);
 
@@ -686,6 +689,14 @@ function createRow(item, type) {
 		audioButton.addEventListener("click", () => {
 			audio.play();
 		});
+
+		if (grade / maxgrade < 0.5) {
+			audioButton.style.backgroundColor = "var(--color-red)";
+		} else if (grade / maxgrade >= 0.5 && grade / maxgrade < 1) {
+			audioButton.style.backgroundColor = "var(--color-yellow)";
+		} else if (grade === maxgrade) {
+			audioButton.style.backgroundColor = "var(--color-green)";
+		}
 
 		rowContainer.appendChild(audioButton);
 

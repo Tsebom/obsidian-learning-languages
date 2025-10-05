@@ -2,10 +2,10 @@
   "cssTheme": "Obsidianite",
   "enabledCssSnippets": [
     "english",
-    "widepage",
-    "sandbox",
     "fix_banner",
-    "properties"
+    "properties",
+    "sandbox",
+    "widepage"
   ],
   "baseFontSize": 21
 }

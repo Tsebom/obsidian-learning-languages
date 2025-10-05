@@ -96,8 +96,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 263.5,
-    "collapsed": true
+    "width": 263.5
   },
   "right": {
     "id": "1ecda9ddff046de8",
@@ -204,8 +203,8 @@
   "lastOpenFiles": [
     "Home.md",
     "service/sandbox.md",
-    "service/Data.md",
     "service/Settings.md",
+    "service/Data.md",
     "video.md",
     "service/baners/video.jpg",
     "Set of words",

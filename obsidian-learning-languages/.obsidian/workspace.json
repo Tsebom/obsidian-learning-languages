@@ -96,7 +96,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 263.5
+    "width": 263.5,
+    "collapsed": true
   },
   "right": {
     "id": "1ecda9ddff046de8",
@@ -201,11 +202,11 @@
   },
   "active": "e7a7b303c61786dc",
   "lastOpenFiles": [
+    "service/Data.md",
+    "video.md",
     "Home.md",
     "service/sandbox.md",
     "service/Settings.md",
-    "service/Data.md",
-    "video.md",
     "service/baners/video.jpg",
     "Set of words",
     "My words",

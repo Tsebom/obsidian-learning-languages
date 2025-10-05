@@ -5,7 +5,7 @@ cssclasses:
 words:
   - word: key
     statistics:
-      grade: 0
+      grade: 33
     translate: ключ
     alternatives:
       - ключевой
@@ -172,7 +172,7 @@ words:
           antonyms: []
   - word: close
     statistics:
-      grade: 0
+      grade: 6
     translate: близко
     alternatives:
       - близкий
@@ -250,7 +250,7 @@ words:
             - start
   - word: tool
     statistics:
-      grade: 1
+      grade: 12
     translate: инструмент
     alternatives:
       - инструментарий
@@ -321,7 +321,7 @@ words:
           antonyms: []
   - word: fork
     statistics:
-      grade: 0
+      grade: 8
     translate: вилка
     alternatives:
       - вилкой

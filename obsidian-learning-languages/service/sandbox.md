@@ -102,7 +102,6 @@ answerContainer.className = "answer-container";
 quizContainer.appendChild(questionContainer);
 questionContainer.appendChild(questionWord);
 
-quizContainer.appendChild(questionContainer);
 quizContainer.appendChild(answerContainer);
 
 dv.container.appendChild(quizContainer);
@@ -135,6 +134,7 @@ function quizLoop() {
 
 	answerWords.forEach(word => {
 		const answerBtn = document.createElement("button");
+		answerBtn.className = "quiz-answer-button";
 		answerBtn.textContent = word;
 
 		answerBtn.addEventListener("click", (event) => {
@@ -694,7 +694,7 @@ function createRow(item, type) {
 			audioButton.style.backgroundColor = "var(--color-red)";
 		} else if (grade / maxgrade >= 0.5 && grade / maxgrade < 1) {
 			audioButton.style.backgroundColor = "var(--color-yellow)";
-		} else if (grade === maxgrade) {
+		} else if (grade / maxgrade >= 1) {
 			audioButton.style.backgroundColor = "var(--color-green)";
 		}
 

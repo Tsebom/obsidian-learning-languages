@@ -67,7 +67,7 @@ function showToast(message, duration = 3000) {
 //----------------------------------------------------------
 
 // Получаем настройки
-const setting = dv.page("service/settings");
+const setting = dv.page("service/Settings");
 const maxgrade = setting.maxgrade;
 
 const container = this.container;

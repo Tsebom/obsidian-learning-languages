@@ -143,7 +143,9 @@ function quizLoop() {
 			if (answeredWord === questionedWord[0]) {
 				answerBtn.style.backgroundColor = "var(--color-green)";
 				answerBtn.style.color = "black";
-				statistic.grade = grade + 1;
+				if (grade < maxgrade) {
+					statistic.grade = grade + 1;
+				}
 				
 			} else {
 				answerBtn.style.backgroundColor = "var(--color-red)";

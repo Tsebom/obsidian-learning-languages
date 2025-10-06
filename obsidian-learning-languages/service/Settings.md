@@ -1,5 +1,8 @@
 ---
 banner: "![[settings.jpg]]"
+---
+---
+banner: "![[settings.jpg]]"
 maxgrade: "30"
 quizautosave: "30"
 libretranslateHost: localhost:5000

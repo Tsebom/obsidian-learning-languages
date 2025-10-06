@@ -1,4 +1,7 @@
 ---
+banner: "![[data1.jpg]]"
+---
+---
 cssclasses:
   - wide-85
 banner: "![[data1.jpg]]"

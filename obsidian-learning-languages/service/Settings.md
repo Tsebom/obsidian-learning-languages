@@ -1,6 +1,7 @@
 ---
 banner: "![[settings.jpg]]"
 maxgrade: "30"
+quizautosave: "30"
 libretranslateHost: localhost:5000
 API_KEY:
 banner_lock: true

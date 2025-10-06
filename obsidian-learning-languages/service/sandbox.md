@@ -116,7 +116,7 @@ const wordList = () => {
 
 	return list;
 };
-
+let countBeforeSave = 0;
 quizLoop();
 
 //--------------------QUIZ LOGIC---------------------------------
@@ -129,6 +129,7 @@ function quizLoop() {
 	const questionedWordTranslate = questionedWordObject?.translate;
 	const statistic = questionedWordObject.statistics;
 	const grade = statistic.grade;
+	const qiuzSave = statistic.quizautosave;
 
 	questionWord.innerText = questionedWordTranslate;
 
@@ -139,6 +140,9 @@ function quizLoop() {
 
 		answerBtn.addEventListener("click", (event) => {
 			const answeredWord = event.currentTarget.textContent;
+			countBeforeSave = countBeforeSave + 1;
+
+			showToast(countBeforeSave);
 
 			if (answeredWord === questionedWord[0]) {
 				answerBtn.style.backgroundColor = "var(--color-green)";
@@ -156,11 +160,14 @@ function quizLoop() {
 			}
 
 			setTimeout(() => {
-				writeData("words", words);
-				//questionWord.innerHTML = "";
-				//answerContainer.innerHTML = "";
-				//quizLoop();
-			}, 0);
+				if (countBeforeSave > qiuzSave) {
+					writeData("words", words);
+				} else {
+					questionWord.innerHTML = "";
+					answerContainer.innerHTML = "";
+					quizLoop();
+				}
+			}, 500);
 		});
 
 		answerContainer.appendChild(answerBtn);

@@ -1,8 +1,28 @@
 ---
-banner: "![[data1.jpg]]"
 cssclasses:
   - wide-85
+banner: "![[data1.jpg]]"
+banner_y: 0.62333
+banner_lock: true
 words:
+  - word: extortion
+    statistics:
+      grade: 10
+    translate: вымогательство
+    alternatives:
+      - шантаж
+      - вымогательства
+    definition:
+      audio: ""
+      meanings:
+        - partOfSpeech: noun
+          definitions:
+            - definition: The practice of extorting money or other property by the use of force or threats.
+              synonyms: []
+              antonyms: []
+          synonyms:
+            - blackmail
+          antonyms: []
   - word: key
     statistics:
       grade: 33
@@ -172,7 +192,7 @@ words:
           antonyms: []
   - word: close
     statistics:
-      grade: 6
+      grade: 17
     translate: близко
     alternatives:
       - близкий
@@ -250,7 +270,7 @@ words:
             - start
   - word: tool
     statistics:
-      grade: 12
+      grade: 29
     translate: инструмент
     alternatives:
       - инструментарий
@@ -321,7 +341,7 @@ words:
           antonyms: []
   - word: fork
     statistics:
-      grade: 8
+      grade: 30
     translate: вилка
     alternatives:
       - вилкой
@@ -515,7 +535,6 @@ words:
 phrases:
   - phrase: NASA issued a draft
     translate: NASA опубликовало проект
-banner_y: 0.51
 
 ---
 ```dataviewjs

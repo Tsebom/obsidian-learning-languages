@@ -1,31 +1,36 @@
 ---
 banner: "![[home.jpg]]"
-banner_y: 0.35334
+banner_y: 0.36667
 banner_lock: true
 cssclasses:
   - wide-85
 ---
 
 ```dataviewjs
+const toast = await app.vault.adapter.read(".obsidian/scripts/toast.js");
+const home = await app.vault.adapter.read(".obsidian/scripts/home.js");
+
+eval(toast);
+eval(home);
+
 const buttonsContainer = document.createElement("div");
 buttonsContainer.className = "buttons-container";
 
 const videoBtn = document.createElement("button");
-videoBtn.className = "video-btn";
+videoBtn.className = "video-btn btn";
 videoBtn.textContent = "Video";
 
 videoBtn.addEventListener("click", async () => {
-	const templatePath = "Services/Template/EVS.md"; // шаблон
-	const targetFolder = "English/Ьн Videos"; // куда сохранять
-	const dataFolder = "Services/Data/Video"; // данные
+	const videoTemplatePath = "service/template/video.md"; // шаблон
+	const videoTargetFolder = "My videos"; // куда сохранять
+	const dataTemplatePath = "service/template/data.md"; // шаблон
+	const dataFolder = "service/data/video"; // данные
+	const quizTemplatePath = "service/template/quiz.md"; // шаблон
+	const quizFolder = "service/quiz"; // quiz note
+	const date = getFormattedDate();
 
 	// Читаем буфер обмена
-	let clipboardText = "";
-	try {
-		clipboardText = await navigator.clipboard.readText();
-	} catch (e) {
-		showToast("Can not read your clipboard");
-	}
+	let clipboardText = await getClipboard();
 
 	// Ищем YouTube-ссылку
 	let youtubeRegex = /(https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=[^&\s]+|youtu\.be\/[^\s]+))/;
@@ -59,64 +64,89 @@ videoBtn.addEventListener("click", async () => {
 		safeTitle = safeTitle.slice(0, 60) + "...";
 	}
 
-	// Загружаем шаблон
-	const templateFile = app.vault.getAbstractFileByPath(templatePath);
-	if (!templateFile) {
-		showToast("The template is not found: " + templatePath);
+	//Формируем имя файла
+	let baseName = `${safeTitle}`;
+	let fileName = `${baseName}.md`;
+	let videoTargetPath = `${videoTargetFolder}/${fileName}`;
+
+	// Проверяем существование файла
+	if (app.vault.getAbstractFileByPath(videoTargetPath)) {
+		showToast(`The file ${videoTargetPath} is existed.`);
+		return;
+	}
+
+	// Загружаем шаблон video
+	const videoTemplateFile = app.vault.getAbstractFileByPath(videoTemplatePath);
+	if (!videoTemplateFile) {
+		showToast("The video template is not found: " + videoTemplatePath);
 		return;
 	}
 
 	// Получаем содержимое шаблона
-	let templateContent = await app.vault.read(templateFile);
+	let videoTemplateContent = await app.vault.read(videoTemplateFile);
 
-	
+	// Формируем имя файла для данных
+	const videoDataBaseName = `data-${date}.md`;
+	const videoDataTargetPath = `${dataFolder}/${videoDataBaseName}`;
+
+	// Загружаем шаблон для данными
+	const dataTemplateFile = app.vault.getAbstractFileByPath(dataTemplatePath);
+	if (!dataTemplateFile) {
+		showToast("The data template is not found: " + dataTemplatePath);
+		return;
+	}
+
+	// Получаем содержимое шаблона для данных
+	let dataTemplateContent = await app.vault.read(dataTemplateFile);
+
+
+
+	// Формируем имя файла для викторины
+	const videoQuizBaseName = `quiz-${date}.md`;
+	const videoQuizTargetPath = `${quizFolder}/${videoQuizBaseName}`;
+
+
+	// Загружаем шаблон для вмкторины
+	const quizTemplateFile = app.vault.getAbstractFileByPath(quizTemplatePath);
+	if (!quizTemplateFile) {
+		showToast("The quiz template is not found: " + quizTemplatePath);
+		return;
+	}
+
+	// Получаем содержимое шаблона для викторины
+	let quizTemplateContent = await app.vault.read(quizTemplateFile);
+
+	let quizNoteContent = quizTemplateContent
+	.replace(/{{dataFile}}/g, videoDataBaseName)
+	.replace(/{{title}}/g, safeTitle);
+
+	// Подставляем переменные
+  let videoNoteContent = videoTemplateContent
+	.replace(/{{title}}/g, safeTitle)
+	.replace(/{{dataFile}}/g, videoDataBaseName)
+	.replace(/{{quizFile}}/g, videoQuizBaseName)
+	.replace(/{{videoUrl}}/g, videoUrl);
+
+	// Создаём файл для video
+	await app.vault.create(videoTargetPath, videoNoteContent);
+	// Создаём файл для данных
+	await app.vault.create(videoDataTargetPath, dataTemplateContent);
+	// Создаём файл для quiz
+	await app.vault.create(videoQuizTargetPath, quizNoteContent);
+
+	let newFile = app.vault.getAbstractFileByPath(videoTargetPath);
+	app.workspace.getLeaf(true).openFile(newFile);
 });
 
+const buttonSetting = document.createElement("button");
+buttonSetting.className = "setting-btn btn";
+buttonSetting.textContent = "⚙️";
+
+buttonSetting.onclick = () => app.workspace.openLinkText("service/settings", "/", false);
+
 buttonsContainer.appendChild(videoBtn);
+buttonsContainer.appendChild(buttonSetting);
+
 dv.container.appendChild(buttonsContainer);
 
-//------------------CUSTOM ALERT-------------------------------
-
-const toastContainer = document.createElement("div");
-toastContainer.style.position = "fixed";
-toastContainer.style.top = "50%";
-toastContainer.style.left = "50%";
-toastContainer.style.transform = "translate(-50%, -50%)";
-toastContainer.style.display = "flex";
-toastContainer.style.flexDirection = "column";
-toastContainer.style.gap = "10px";
-toastContainer.style.zIndex = "9999";
-document.body.appendChild(toastContainer);
-
-function showToast(message, duration = 3000) {
-  const toast = document.createElement("div");
-  toast.textContent = message;
-
-  // Стили для тоста
-  toast.style.background = "#333";
-	toast.style.fontSize= "30px";
-  toast.style.color = "#ff0000";
-  toast.style.padding = "20px 25px";
-  toast.style.borderRadius = "10px";
-  toast.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
-  toast.style.fontFamily = "sans-serif";
-  toast.style.opacity = "0";
-  toast.style.transform = "translateY(-20px)";
-  toast.style.transition = "opacity 0.3s, transform 0.3s";
-
-  toastContainer.appendChild(toast);
-
-  // плавное появление
-  requestAnimationFrame(() => {
-    toast.style.opacity = "1";
-    toast.style.transform = "translateY(0)";
-  });
-
-  // скрытие через duration
-  setTimeout(() => {
-    toast.style.opacity = "0";
-    toast.style.transform = "translateY(-20px)";
-    setTimeout(() => toast.remove(), 300);
-  }, duration);
-}
 ```

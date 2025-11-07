@@ -7,8 +7,8 @@ cssclasses:
 tags:
   - quiz
 settings: service/settings
-datawords: service/data/video/{{dataFile}}
-video: My videos/{{title}}.md
+datawords: {{dataFile}}
+mainFile: {{contentType}}/{{title}}.md
 ---
 
 
@@ -76,12 +76,12 @@ listWords.forEach((word) => {
 	}
 });
 
-const completed = await meta.getPropertyValue("completed", thisFile.video);
+const completed = await meta.getPropertyValue("completed", thisFile.mainFile);
 
 if(listWords.length === wordForRepeate.length && !completed) {
-	await meta.update("completed", true, thisFile.video);
+	await meta.update("completed", true, thisFile.mainFile);
 	showToast("Quiz is comlited", 3000);
-	app.workspace.openLinkText(thisFile.video, '/', false);
+	app.workspace.openLinkText(thisFile.mainFile, '/', false);
 } else if(listWords.length === wordForRepeate.length && completed) {
 	showToast("Quiz is comlited", 3000);
 }

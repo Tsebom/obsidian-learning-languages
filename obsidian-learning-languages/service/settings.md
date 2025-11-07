@@ -2,7 +2,7 @@
 banner: "![[settings.jpg]]"
 banner_lock: true
 banner_y: 0.65
-maxgrade: "3"
+maxgrade: "42"
 wordscountstudy: "7"
 libretranslateHost: localhost:5000
 API_KEY:
@@ -16,16 +16,16 @@ target_language: ru
 > Устанавливает количество слов находящихся на изучении.
 
 > [!info] LibretranslateHost: `INPUT[text:libretranslateHost]`
-> Устанавливает адрес хоста Libretranslate
+> Устанавливает адрес хоста Libretranslate.
 
 > [!info] API_KEY: `INPUT[text:API_KEY]`
-> Устанавливает API key для Libretranslate
+> Устанавливает API key для Libretranslate.
 
 > [!info] Sourse language: `INPUT[text:sourse_language]`
-> Изучаемый язык
+> Изучаемый язык.
 
 > [!info] Target language: `INPUT[text:target_language]`
-> Родной язык
+> Родной язык.
 
 
 

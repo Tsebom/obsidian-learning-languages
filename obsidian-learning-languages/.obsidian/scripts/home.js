@@ -24,3 +24,24 @@ window.getFormattedDate = function() {
 
   return `${day}.${month}.${year}-${hours}-${minutes}-${seconds}`;
 }
+
+window.getFirstH1 = async function(url) {
+    try {
+        // Используем CORS-прокси AllOrigins
+        const proxy = "https://api.allorigins.win/get?url=" + encodeURIComponent(url);
+
+        const res = await fetch(proxy);
+        const data = await res.json(); // AllOrigins возвращает JSON
+        const html = data.contents;
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const h1 = doc.querySelector("h1");
+
+        return h1 ? h1.textContent.trim() : "❌ H1 не найден";
+    } catch (e) {
+        console.error(e);
+				showToast("⚠️ Ошибка загрузки");
+        return null;
+    }
+}

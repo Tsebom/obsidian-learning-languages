@@ -1,2 +1,18 @@
+obsidian-learning-languages/Aticls/*
+obsidian-learning-languages/Videos/*
+obsidian-learning-languages/Words/*
+obsidian-learning-languages/service/data/*
+obsidian-learning-languages/service/quiz/*
+
+!obsidian-learning-languages/Aticls/
+!obsidian-learning-languages/Aticls/.gitkeep
+!obsidian-learning-languages/Videos/
+!obsidian-learning-languages/Videos/.gitkeep
+!obsidian-learning-languages/Words/
+!obsidian-learning-languages/Words/.gitkeep
+!obsidian-learning-languages/service/data/
+!obsidian-learning-languages/service/data/.gitkeep
+!obsidian-learning-languages/service/quiz/
+!obsidian-learning-languages/service/quiz/.gitkeep
 
 obsidian-learning-languages/.obsidian/workspace.json

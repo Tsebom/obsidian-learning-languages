@@ -5,7 +5,7 @@ banner_lock: true
 cssclasses:
   - wide-85
 settings: service/settings
-datawords: service/data/video/{{dataFile}}
+datawords: service/data/{{dataFile}}
 quiz: service/quiz/{{quizFile}}
 link: "{{videoUrl}}"
 completed: false
@@ -22,7 +22,7 @@ id: delete
 icon: trash
 action:
  type: inlineJS
- code: "if (confirm('Are you sure you want to delete this file?')) {await app.vault.adapter.remove('service/quiz/{{quizFile}}');await app.vault.adapter.remove('service/data/video/{{dataFile}}');await app.vault.adapter.remove('My videos/{{title}}.md');}"
+ code: "if (confirm('Are you sure you want to delete this file?')) {await app.vault.adapter.remove('service/quiz/{{quizFile}}');await app.vault.adapter.remove('service/data/{{dataFile}}');await app.vault.adapter.remove('Videos/{{title}}.md');}"
 hidden: true
 ```
 ```meta-bind-button
@@ -44,7 +44,7 @@ dv.paragraph(`[${name}](${url})`);
 >```
 
 ```dataviewjs
-let url = dv.current().link;
+/*let url = dv.current().link;
 
 // Пытаемся найти id через регулярное выражение
 let match = url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);
@@ -54,7 +54,7 @@ if (match) {
   dv.paragraph(`<iframe width="100%" height="450" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>`);
 } else {
   dv.paragraph("❌ Не удалось извлечь ID видео");
-}
+}*/
 ```
 
 ```dataviewjs

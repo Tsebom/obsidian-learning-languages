@@ -5,24 +5,24 @@ banner_lock: true
 cssclasses:
   - wide-85
 settings: service/settings
-datawords: service/data/video/data-27.10.2025-02-46-44.md
-quiz: service/quiz/quiz-27.10.2025-02-46-44.md
-link: "https://www.youtube.com/watch?v=LAFdGrKCfkQ"
+datawords: service/data/{{dataFile}}
+quiz: service/quiz/{{quizFile}}
+link: "{{articlUrl}}"
 completed: false
 tags:
-  - video
+  - articl
 ---
 
 > [!info] COMPLETED: `INPUT[toggle:completed]`
 
 ```meta-bind-button
 style: destructive
-label: Delete Video
+label: Delete Articl
 id: delete
 icon: trash
 action:
  type: inlineJS
- code: "if (confirm('Are you sure you want to delete this file?')) {await app.vault.adapter.remove('service/quiz/quiz-27.10.2025-02-46-44.md');await app.vault.adapter.remove('service/data/video/data-27.10.2025-02-46-44.md');await app.vault.adapter.remove('My videos/How SpaceX will get WATER to Mars for Starship Return new Br....md');}"
+ code: "if (confirm('Are you sure you want to delete this file?')) {await app.vault.adapter.remove('service/quiz/{{quizFile}}');await app.vault.adapter.remove('service/data/{{dataFile}}');await app.vault.adapter.remove('Articls/{{title}}.md');}"
 hidden: true
 ```
 ```meta-bind-button
@@ -32,32 +32,16 @@ id: quiz
 icon: rocket
 action:
  type: inlineJS
- code: "app.workspace.openLinkText('service/quiz/quiz-27.10.2025-02-46-44.md', '/', false);"
+ code: "app.workspace.openLinkText('service/quiz/{{quizFile}}', '/', false);"
 hidden: true
 ```
 
-> [!summary] Video| `BUTTON[quiz]`| `BUTTON[delete]`
+> [!summary] Articl| `BUTTON[quiz]`| `BUTTON[delete]`
 > ```dataviewjs
 let url = dv.current()?.link;
 let name = dv.current()?.file?.name;
 dv.paragraph(`[${name}](${url})`);
 >```
-
-```dataviewjs
-/*
-let url = dv.current().link;
-
-// Пытаемся найти id через регулярное выражение
-let match = url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);
-
-if (match) {
-  let id = match[1];
-  dv.paragraph(`<iframe width="100%" height="450" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>`);
-} else {
-  dv.paragraph("❌ Не удалось извлечь ID видео");
-}
-*/
-```
 
 ```dataviewjs
 const toast = await app.vault.adapter.read(".obsidian/scripts/toast.js");

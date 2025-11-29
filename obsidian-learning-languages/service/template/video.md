@@ -44,7 +44,7 @@ dv.paragraph(`[${name}](${url})`);
 >```
 
 ```dataviewjs
-/*let url = dv.current().link;
+let url = dv.current().link;
 
 // Пытаемся найти id через регулярное выражение
 let match = url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);
@@ -54,7 +54,7 @@ if (match) {
   dv.paragraph(`<iframe width="100%" height="450" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>`);
 } else {
   dv.paragraph("❌ Не удалось извлечь ID видео");
-}*/
+}
 ```
 
 ```dataviewjs

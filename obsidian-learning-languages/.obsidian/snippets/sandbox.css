@@ -1,0 +1,231 @@
+/*
+ HOME PAGE
+*/
+
+/*
+ Quiz
+*/
+
+.quiz-container {
+	max-width: 780px;
+	margin: 0 auto;
+	margin-bottom: 50px;
+	
+}
+
+.question-container {
+	text-align: center;
+	border: 2px solid var(--text-title-h1);
+	border-radius: 10px;
+	padding: 20px;
+	margin-bottom: 30px;
+}
+
+.question-word {
+	font-size: 40px !important;
+}
+
+.answer-container {
+	display: grid;
+	gap: 20px;
+}
+
+.quiz-answer-button {
+	border: 2px solid var(--interactive-normal);
+	border-radius: 10px;
+	font-size: 30px !important;
+	padding: 30px 40px;
+}
+
+.quiz-answer-button:hover {
+	color: var(--text-title-h1);
+	border: 2px solid var(--text-title-h1);
+}
+
+/*
+ Adding new word or phrase
+*/
+
+.words-add-container {
+	padding: 20px;
+	margin-bottom: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.word-add-input {
+	margin-right: 10px;
+	min-width: 700px;
+	height: 40px !important;
+	padding: 30px 20px !important;
+	font-size: 21px !important;
+	border: 2px solid var(--text-muted);
+	border-radius:15px !important;
+}
+
+.word-add-btn {
+	padding: 30px 20px !important;
+	min-width: 80px;
+	height: 40px !important;
+	border-radius:15px !important;
+	font-size: 21px !important;
+	font-weight: bold;
+	color: var(--text-title-h1) !important;
+}
+
+/*
+ Table of words
+*/
+
+.last-phrase-container {
+	display: flex;
+}
+
+.last-phrase-sourse,
+.last-phrase-target {
+	padding: 20px;
+	flex: 1 1 0;
+	margin-bottom: 50px;
+	border: 1px solid var(--text-title-h1);
+}
+
+.last-phrase-sourse {
+	border-radius: 10px 0 0 10px;
+}
+
+.last-phrase-target {
+	border-radius:  0 10px 10px 0;
+}
+
+.word-title-container {
+	text-align: center;
+	border-bottom: 2px solid var(--text-title-h1);
+	border-top: 2px solid var(--text-title-h1);
+}
+
+.words-info-container {
+	display: block;
+}
+
+@media (min-width: 1200px) {
+	.words-info-container {
+		display: flex;
+	}
+	
+	.words-container,
+	.word-definition-container {
+		flex: 1 1 0;
+		min-width: 0;
+	}
+}
+
+.words-container {
+	border-right: 1px solid var(--text-title-h1);
+	padding: 10px;
+	margin-bottom: 50px;
+}
+
+.word-definition-container {
+	border-left: 1px solid var(--text-title-h1);
+	padding: 10px;
+	margin-bottom: 50px;
+}
+
+.paragraph-container {
+	display: flex; 
+	margin-bottom: 5px;
+}
+
+.paragraph-definition {
+	padding-left: 20px;
+	margin: 0px !important;
+}
+
+.paragraph-definition-translate {
+	padding-left: 20px;
+	margin: 0px !important;
+	border-top: 1px dashed var(--text-muted);
+}
+
+.phrases-container {
+	border-left: 1px solid var(--text-title-h1);
+	border-right: 1px solid var(--text-title-h1);
+	padding: 10px;
+	margin-bottom: 50px;
+}
+
+.word-row-container,
+.phrase-row-container {
+	display: flex;
+	border-top: 1px solid var(--background-primary);
+	border-left: 1px solid var(--background-primary);
+	border-right: 1px solid var(--background-primary);
+	border-bottom: 1px solid var(--text-muted);
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 8px;
+	align-items: center;
+}
+
+.word-row-container-active {
+	border: 1px solid var(--text-title-h1);
+}
+
+.word-row-container:hover {
+	color: var(--text-title-h1);
+}
+
+.phrase-row-container {
+	padding-left: 56px;
+}
+
+.partofspeach-container {
+	display: flex;
+}
+
+.pos {
+	border-bottom: 2px solid var(--text-muted);
+	border-right: 2px dashed var(--text-muted);
+	padding: 8px;
+	min-width: 130px;
+}
+
+.definitions-container {
+	border-bottom: 2px solid var(--text-muted);
+	padding: 8px;
+	padding-left: 20px;
+	flex: 1 1 0;
+}
+
+.definition-container {
+	border-bottom: 1px solid var(--text-muted);
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.definition-container:last-child {
+	border-bottom: none;
+}
+
+.word-btn,
+.phrase-btn {
+	padding: 15px;
+	flex: 0 0 auto;
+	border-radius: 10px;
+}
+
+.word-container,
+.phrase-container {
+	margin-right: 15px;
+	margin-left: 20px;
+	flex: 1 1 0;
+	min-width: 0;
+	border-left: 2px solid var(--text-muted);
+	padding-left: 10px;
+}
+
+.word-container:nth-child(3),
+.phrase-container:nth-child(2) {
+	border-right: 2px solid var(--text-muted);
+}

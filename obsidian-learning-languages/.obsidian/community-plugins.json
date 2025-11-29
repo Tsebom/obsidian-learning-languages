@@ -5,10 +5,11 @@
   "templater-obsidian",
   "calendar",
   "omnisearch",
-  "obsidian-banners",
+  "homepage",
   "cmdr",
   "file-explorer-note-count",
-  "homepage",
   "obsidian-icon-folder",
-  "obsidian-icons-plugin"
+  "obsidian-icons-plugin",
+  "obsidian-banners",
+  "js-engine"
 ]

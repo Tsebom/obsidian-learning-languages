@@ -9,9 +9,11 @@ cssclasses:
 ```dataviewjs
 const toast = await app.vault.adapter.read(".obsidian/scripts/toast.js");
 const home = await app.vault.adapter.read(".obsidian/scripts/home.js");
+const popup = await app.vault.adapter.read(".obsidian/scripts/popup.js");
 
 eval(toast);
 eval(home);
+eval(popup);
 
 const dataTemplatePath = "service/template/data.md"; // шаблон
 const dataFolder = "service/data"; // данные
@@ -60,8 +62,7 @@ videoBtn.addEventListener("click", async () => {
 	}
 
 	// Ограничиваем длину названия
-	let safeTitle = videoTitle.replace(/[\\\/:*?"<>|']/g, "");
-	//let safeTitle = videoTitle.replace(/[\\\/:*?"<>|]/g, ""); // убираем запрещённые символы
+	let safeTitle = videoTitle.replace(/[\\\/:*?"<>|']/g, ""); // убираем запрещённые символы
 	if (safeTitle.length > 60) {
 		safeTitle = safeTitle.slice(0, 60) + "...";
 	}
@@ -243,6 +244,14 @@ articlBtn.addEventListener("click", async () => {
 	app.workspace.getLeaf(true).openFile(newFile);
 });
 
+const wordBtn = document.createElement("button");
+wordBtn.className = "word-btn btn";
+wordBtn.textContent = "Word";
+
+wordBtn.addEventListener("click", async () => {
+	showPopupNewName();
+});
+
 const buttonSetting = document.createElement("button");
 buttonSetting.className = "setting-btn btn";
 buttonSetting.textContent = "⚙️";
@@ -251,148 +260,8 @@ buttonSetting.onclick = () => app.workspace.openLinkText("service/settings", "/"
 
 buttonsContainer.appendChild(videoBtn);
 buttonsContainer.appendChild(articlBtn);
-buttonsContainer.appendChild(buttonSetting);
-
-dv.container.appendChild(buttonsContainer);
-
-```
-
-
-//////////////////////////////////////////
-
-```dataviewjs
-const toast = await app.vault.adapter.read(".obsidian/scripts/toast.js");
-const home = await app.vault.adapter.read(".obsidian/scripts/home.js");
-
-eval(toast);
-eval(home);
-
-const buttonsContainer = document.createElement("div");
-buttonsContainer.className = "buttons-container";
-
-const wordBtn = document.createElement("button");
-wordBtn.className = "word-btn btn";
-wordBtn.textContent = "Word";
-
-wordBtn.addEventListener("click", async () => {
-	const videoTemplatePath = "service/template/video.md"; // шаблон
-	const videoTargetFolder = "Videos"; // куда сохранять
-	const dataTemplatePath = "service/template/data.md"; // шаблон
-	const dataFolder = "service/data/video"; // данные
-	const quizTemplatePath = "service/template/quiz.md"; // шаблон
-	const quizFolder = "service/quiz"; // quiz note
-	const date = getFormattedDate();
-
-	// Читаем буфер обмена
-	let clipboardText = await getClipboard();
-
-	// Ищем YouTube-ссылку
-	let youtubeRegex = /(https?:\/\/(?:www\.)?(?:youtube\.com\/watch\?v=[^&\s]+|youtu\.be\/[^\s]+))/;
-	let match = clipboardText.match(youtubeRegex);
-	let videoUrl = match ? match[1] : null;
-
-	if (!videoUrl) {
-		showToast("Please add the Youtube video link to your clipboard");
-		return;
-	}
-
-	// Получаем videoId
-	let videoId = videoUrl.includes("v=")
-		? videoUrl.split("v=")[1].split("&")[0]
-		: videoUrl.split("/").pop();
-
-	// Получаем название видео через oEmbed
-	let videoTitle = videoId;
-	try {
-		let response = await requestUrl({
-			url: `https://www.youtube.com/oembed?url=${encodeURIComponent(videoUrl)}&format=json`
-			});
-		videoTitle = response.json.title;
-	} catch (e) {
-		showToast(`Unable to get video title: ${e}`);
-	}
-
-	// Ограничиваем длину названия
-	let safeTitle = videoTitle.replace(/[\\\/:*?"<>|']/g, "");
-	//let safeTitle = videoTitle.replace(/[\\\/:*?"<>|]/g, ""); // убираем запрещённые символы
-	if (safeTitle.length > 60) {
-		safeTitle = safeTitle.slice(0, 60) + "...";
-	}
-
-	//Формируем имя файла
-	let baseName = `${safeTitle}`;
-	let fileName = `${baseName}.md`;
-	let videoTargetPath = `${videoTargetFolder}/${fileName}`;
-
-	// Проверяем существование файла
-	if (app.vault.getAbstractFileByPath(videoTargetPath)) {
-		showToast(`The file ${videoTargetPath} is existed.`);
-		return;
-	}
-
-	// Загружаем шаблон video
-	const videoTemplateFile = app.vault.getAbstractFileByPath(videoTemplatePath);
-	if (!videoTemplateFile) {
-		showToast("The video template is not found: " + videoTemplatePath);
-		return;
-	}
-
-	// Получаем содержимое шаблона
-	let videoTemplateContent = await app.vault.read(videoTemplateFile);
-
-	// Формируем имя файла для данных
-	const videoDataBaseName = `data-${date}.md`;
-	const videoDataTargetPath = `${dataFolder}/${videoDataBaseName}`;
-
-	// Загружаем шаблон для данными
-	const dataTemplateFile = app.vault.getAbstractFileByPath(dataTemplatePath);
-	if (!dataTemplateFile) {
-		showToast("The data template is not found: " + dataTemplatePath);
-		return;
-	}
-
-	// Получаем содержимое шаблона для данных
-	let dataTemplateContent = await app.vault.read(dataTemplateFile);
-
-	// Формируем имя файла для викторины
-	const videoQuizBaseName = `quiz-${date}.md`;
-	const videoQuizTargetPath = `${quizFolder}/${videoQuizBaseName}`;
-
-	// Загружаем шаблон для вмкторины
-	const quizTemplateFile = app.vault.getAbstractFileByPath(quizTemplatePath);
-	if (!quizTemplateFile) {
-		showToast("The quiz template is not found: " + quizTemplatePath);
-		return;
-	}
-
-	// Получаем содержимое шаблона для викторины
-	let quizTemplateContent = await app.vault.read(quizTemplateFile);
-
-	let quizNoteContent = quizTemplateContent
-	.replace(/{{dataFile}}/g, videoDataTargetPath)
-	.replace(/{{title}}/g, safeTitle);
-
-	// Подставляем переменные
-  let videoNoteContent = videoTemplateContent
-	.replace(/{{title}}/g, safeTitle)
-	.replace(/{{dataFile}}/g, videoDataBaseName)
-	.replace(/{{quizFile}}/g, videoQuizBaseName)
-	.replace(/{{videoUrl}}/g, videoUrl);
-
-	// Создаём файл для video
-	await app.vault.create(videoTargetPath, videoNoteContent);
-	// Создаём файл для данных
-	await app.vault.create(videoDataTargetPath, dataTemplateContent);
-	// Создаём файл для quiz
-	await app.vault.create(videoQuizTargetPath, quizNoteContent);
-
-	let newFile = app.vault.getAbstractFileByPath(videoTargetPath);
-	app.workspace.getLeaf(true).openFile(newFile);
-});
-
-
-
 buttonsContainer.appendChild(wordBtn);
+buttonsContainer.appendChild(buttonSetting);
 
 dv.container.appendChild(buttonsContainer);
 

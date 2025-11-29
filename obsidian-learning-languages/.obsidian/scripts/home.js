@@ -25,23 +25,21 @@ window.getFormattedDate = function() {
   return `${day}.${month}.${year}-${hours}-${minutes}-${seconds}`;
 }
 
-window.getFirstH1 = async function(url) {
-    try {
-        // Используем CORS-прокси AllOrigins
-        const proxy = "https://api.allorigins.win/get?url=" + encodeURIComponent(url);
+window.getFirstH1 = async function (url) {
+  try {
+    // Используем встроенный requestUrl — работает в Obsidian БЕЗ CORS!
+    const response = await requestUrl(url);
+    if (response.status !== 200) throw new Error(`HTTP ${response.status}`);
 
-        const res = await fetch(proxy);
-        const data = await res.json(); // AllOrigins возвращает JSON
-        const html = data.contents;
+    const text = response.text;
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, "text/html");
+    const h1 = doc.querySelector("h1");
 
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        const h1 = doc.querySelector("h1");
-
-        return h1 ? h1.textContent.trim() : "❌ H1 не найден";
-    } catch (e) {
-        console.error(e);
-				showToast("⚠️ Ошибка загрузки");
-        return null;
-    }
+    return h1 ? h1.textContent.trim() : "H1 не найден";
+  } catch (e) {
+    console.warn("Ошибка загрузки:", url, e);
+    showPopupNewArticleName();
+    return "Не удалось загрузить";
+  }
 }

@@ -7,22 +7,21 @@ cssclasses:
 settings: service/settings
 datawords: service/data/{{dataFile}}
 quiz: service/quiz/{{quizFile}}
-link: "{{videoUrl}}"
 completed: false
 tags:
-  - video
+  - articl
 ---
 
 > [!info] COMPLETED: `INPUT[toggle:completed]`
 
 ```meta-bind-button
 style: destructive
-label: Delete Video
+label: Delete Words
 id: delete
 icon: trash
 action:
  type: inlineJS
- code: "if (confirm('Are you sure you want to delete this file?')) {await app.vault.adapter.remove('service/quiz/{{quizFile}}');await app.vault.adapter.remove('service/data/{{dataFile}}');await app.vault.adapter.remove('Videos/{{title}}.md');}"
+ code: "if (confirm('Are you sure you want to delete this file?')) {await app.vault.adapter.remove('service/quiz/{{quizFile}}');await app.vault.adapter.remove('service/data/{{dataFile}}');await app.vault.adapter.remove('Words/{{title}}.md');}"
 hidden: true
 ```
 ```meta-bind-button
@@ -36,26 +35,8 @@ action:
 hidden: true
 ```
 
-> [!summary] Video| `BUTTON[quiz]`| `BUTTON[delete]`
-> ```dataviewjs
-let url = dv.current()?.link;
-let name = dv.current()?.file?.name;
-dv.paragraph(`[${name}](${url})`);
->```
+> [!summary] Word| `BUTTON[quiz]`| `BUTTON[delete]`
 
-```dataviewjs
-let url = dv.current().link;
-
-// Пытаемся найти id через регулярное выражение
-let match = url.match(/(?:v=|youtu\.be\/|embed\/)([a-zA-Z0-9_-]{11})/);
-
-if (match) {
-  let id = match[1];
-  dv.paragraph(`<iframe width="100%" height="450" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>`);
-} else {
-  dv.paragraph("❌ Не удалось извлечь ID видео");
-}
-```
 
 ```dataviewjs
 const toast = await app.vault.adapter.read(".obsidian/scripts/toast.js");

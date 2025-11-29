@@ -9,17 +9,17 @@ popupContainer.style.gap = "10px";
 popupContainer.style.zIndex = "9999";
 document.body.appendChild(popupContainer);
 
-window.showPopupNewName = function() {
-	// Плавное появление
-  const showForm = function() {
-    form.style.opacity = "1";
-    form.style.transform = "translateY(0)";
-  }
+window.showForm = function(form) {
+	form.style.opacity = "1";
+  form.style.transform = "translateY(0)";
+}
 
-	// Скрытие
-	const hideForm = function() {
-		popupContainer.innerHTML = "";
-	}
+window.hideForm = function() {
+	popupContainer.innerHTML = "";
+}
+
+// Форма для нового файла
+window.showPopupNewName = function() {
 
 	const wordTemplatePath = "service/template/word.md"
 	const wordTargetFolder = "Words";
@@ -32,13 +32,13 @@ window.showPopupNewName = function() {
 	const form = document.createElement("div");
 	form.style.background = "#333";
 	form.style.fontSize= "30px";
-  form.style.padding = "20px 25px";
-  form.style.borderRadius = "10px";
-  form.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
-  form.style.fontFamily = "sans-serif";
-  form.style.opacity = "0";
-  form.style.transform = "translateY(-20px)";
-  form.style.transition = "opacity 0.3s, transform 0.3s";
+	form.style.padding = "20px 25px";
+	form.style.borderRadius = "10px";
+	form.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
+	form.style.fontFamily = "sans-serif";
+	form.style.opacity = "0";
+	form.style.transform = "translateY(-20px)";
+	form.style.transition = "opacity 0.3s, transform 0.3s";
 	form.style.minWidth = "700px";
 
 	const inputName = document.createElement("input");
@@ -56,11 +56,13 @@ window.showPopupNewName = function() {
 	buttonSave.innerText = "Save";
 	buttonSave.style.border = "1px solid rgba(0,0,0,0.2)";
 	buttonSave.style.background = "var(--interactive-accent)";
+	buttonSave.style.fontWeight = "bold";
 
 	const buttonCansel = document.createElement("button");
 	buttonCansel.innerText = "Cansel";
 	buttonCansel.style.border = "1px solid rgba(0,0,0,0.2)";
 	buttonCansel.style.background = "var(--background-modifier-error)";
+	buttonCansel.style.fontWeight = "bold";
 
 	buttonContainer.appendChild(buttonSave);
 	buttonContainer.appendChild(buttonCansel);
@@ -161,5 +163,64 @@ window.showPopupNewName = function() {
 
 	popupContainer.appendChild(form);
 
-	showForm();
+	showForm(form);
+}
+
+window.showPopupDeleteFile = function(message, quizFile, dataFile, thisFile) {
+
+	const form = document.createElement("div");
+	form.style.background = "#333";
+	form.style.fontSize= "30px";
+	form.style.padding = "20px 25px";
+	form.style.borderRadius = "10px";
+	form.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
+	form.style.fontFamily = "sans-serif";
+	form.style.opacity = "0";
+	form.style.transform = "translateY(-20px)";
+	form.style.transition = "opacity 0.3s, transform 0.3s";
+	form.style.minWidth = "700px";
+
+	const title = document.createElement("h1");
+	title.innerText = message;
+	title.style.marginBottom = "10px";
+	title.style.fontSize = "18px";
+	title.style.fontWeight = "bold";
+
+	const buttonContainer = document.createElement("div");
+	buttonContainer.style.display = "flex";
+	buttonContainer.style.justifyContent = "flex-end";
+	buttonContainer.style.gap = "10px";
+
+	const buttonOk = document.createElement("button");
+	buttonOk.innerText = "Ok";
+	buttonOk.style.border = "1px solid rgba(0,0,0,0.2)";
+	buttonOk.style.background = "var(--interactive-accent)";
+	buttonOk.style.fontWeight = "bold";
+
+	const buttonCansel = document.createElement("button");
+	buttonCansel.innerText = "Cansel";
+	buttonCansel.style.border = "1px solid rgba(0,0,0,0.2)";
+	buttonCansel.style.background = "var(--background-modifier-error)";
+	buttonCansel.style.fontWeight = "bold";
+
+	buttonContainer.appendChild(buttonOk);
+	buttonContainer.appendChild(buttonCansel);
+
+	form.appendChild(title);
+	form.appendChild(buttonContainer);
+
+	buttonOk.addEventListener("click", async () => {
+		await app.vault.adapter.remove(quizFile);
+		await app.vault.adapter.remove(dataFile);
+		await app.vault.adapter.remove(thisFile);
+		hideForm();
+	});
+
+	buttonCansel.addEventListener("click", () => {
+		hideForm();
+	});
+
+	popupContainer.appendChild(form);
+
+	showForm(form);
 }

@@ -21,7 +21,7 @@ id: delete
 icon: trash
 action:
  type: inlineJS
- code: "if (confirm('Are you sure you want to delete this file?')) {await app.vault.adapter.remove('service/quiz/{{quizFile}}');await app.vault.adapter.remove('service/data/{{dataFile}}');await app.vault.adapter.remove('Words/{{title}}.md');}"
+ code: "window.showPopupDeleteFile('Are you sure you want to delete this file?', 'service/quiz/{{quizFile}}', 'service/data/{{dataFile}}', 'Words/{{title}}.md')"
 hidden: true
 ```
 ```meta-bind-button

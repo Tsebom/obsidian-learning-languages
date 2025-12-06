@@ -7,7 +7,7 @@ cssclasses:
 settings: service/settings
 datawords: service/data/{{dataFile}}
 quiz: service/quiz/{{quizFile}}
-link: "{{articlUrl}}"
+link: "{{url}}"
 completed: false
 tags:
   - articl

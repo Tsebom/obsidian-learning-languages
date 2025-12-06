@@ -23,11 +23,6 @@ window.showPopupNewName = function() {
 
 	const wordTemplatePath = "service/template/word.md"
 	const wordTargetFolder = "Words";
-	const dataTemplatePath = "service/template/data.md"; // шаблон
-	const dataFolder = "service/data"; // данные
-	const quizTemplatePath = "service/template/quiz.md"; // шаблон
-	const quizFolder = "service/quiz"; // quiz note
-	const date = getFormattedDate();
 
 	const form = document.createElement("div");
 	form.style.background = "#333";
@@ -86,75 +81,7 @@ window.showPopupNewName = function() {
 
 		hideForm();
 
-		//Формируем имя файла
-		let baseName = `${safeTitle}`;
-		let fileName = `${baseName}.md`;
-		let wordTargetPath = `${wordTargetFolder}/${fileName}`;
-
-		// Проверяем существование файла
-		if (app.vault.getAbstractFileByPath(wordTargetPath)) {
-			showToast(`The file ${wordTargetPath} is existed.`);
-			return;
-		}
-
-		// Загружаем шаблон word
-		const wordTemplateFile = app.vault.getAbstractFileByPath(wordTemplatePath);
-		if (!wordTemplateFile) {
-			showToast("The word template is not found: " + wordTemplatePath);
-			return;
-		}
-
-		// Получаем содержимое шаблона
-		let wordTemplateContent = await app.vault.read(wordTemplateFile);
-
-		// Формируем имя файла для данных
-		const wordDataBaseName = `data-${date}.md`;
-		const wordDataTargetPath = `${dataFolder}/${wordDataBaseName}`;
-
-		// Загружаем шаблон для данными
-		const dataTemplateFile = app.vault.getAbstractFileByPath(dataTemplatePath);
-		if (!dataTemplateFile) {
-			showToast("The data template is not found: " + dataTemplatePath);
-			return;
-		}
-
-		// Получаем содержимое шаблона для данных
-		let dataTemplateContent = await app.vault.read(dataTemplateFile);
-
-		// Формируем имя файла для викторины
-		const wordQuizBaseName = `quiz-${date}.md`;
-		const wordQuizTargetPath = `${quizFolder}/${wordQuizBaseName}`;
-
-		// Загружаем шаблон для вмкторины
-		const quizTemplateFile = app.vault.getAbstractFileByPath(quizTemplatePath);
-		if (!quizTemplateFile) {
-			showToast("The quiz template is not found: " + quizTemplatePath);
-			return;
-		}
-
-		// Получаем содержимое шаблона для викторины
-		let quizTemplateContent = await app.vault.read(quizTemplateFile);
-
-		let quizNoteContent = quizTemplateContent
-		.replace(/{{dataFile}}/g, wordDataTargetPath)
-		.replace(/{{contentType}}/g, wordTargetFolder)
-		.replace(/{{title}}/g, safeTitle);
-
-		// Подставляем переменные
-	  let wordNoteContent = wordTemplateContent
-		.replace(/{{title}}/g, safeTitle)
-		.replace(/{{dataFile}}/g, wordDataBaseName)
-		.replace(/{{quizFile}}/g, wordQuizBaseName)
-
-		// Создаём файл для word
-		await app.vault.create(wordTargetPath, wordNoteContent);
-		// Создаём файл для данных
-		await app.vault.create(wordDataTargetPath, dataTemplateContent);
-		// Создаём файл для quiz
-		await app.vault.create(wordQuizTargetPath, quizNoteContent);
-
-		let newFile = app.vault.getAbstractFileByPath(wordTargetPath);
-		app.workspace.getLeaf(true).openFile(newFile);
+		createFile(safeTitle, wordTemplatePath, wordTargetFolder);
 	});
 
 	buttonCansel.addEventListener("click", () => {

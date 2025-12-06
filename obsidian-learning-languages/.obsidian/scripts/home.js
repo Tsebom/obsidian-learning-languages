@@ -43,3 +43,96 @@ window.getFirstH1 = async function (url) {
     return "Не удалось загрузить";
   }
 }
+
+window.createFile = async function(
+	title, // Название файла
+	templatePath, // Путь к шаблону файла
+	targetFolder, // Целевая папка	
+	url = "" // Ссылка на изучаемый ресурс (опционально)
+) {
+	const dataTemplatePath = "service/template/data.md"; // шаблон
+	const dataFolder = "service/data"; // данные
+	const quizTemplatePath = "service/template/quiz.md"; // шаблон
+	const quizFolder = "service/quiz"; // quiz note
+	const date = getFormattedDate();
+
+	//Формируем имя файла
+	let baseName = `${title}`;
+	let fileName = `${baseName}.md`;
+	let targetPath = `${targetFolder}/${fileName}`;
+
+	// Проверяем существование файла
+	if (app.vault.getAbstractFileByPath(targetPath)) {
+		showToast(`The file "${targetPath}" is existed.`);
+		return;
+	}
+
+	// Загружаем шаблон
+	const templateFile = app.vault.getAbstractFileByPath(templatePath);
+	if (!templateFile) {
+		showToast("The template is not found: " + templatePath);
+		return;
+	}
+
+	// Получаем содержимое шаблона
+	let templateContent = await app.vault.read(templateFile);
+
+	// Формируем имя файла для данных
+	const dataBaseName = `data-${date}.md`;
+	const dataTargetPath = `${dataFolder}/${dataBaseName}`;
+
+	// Загружаем шаблон для данными
+	const dataTemplateFile = app.vault.getAbstractFileByPath(dataTemplatePath);
+	if (!dataTemplateFile) {
+		showToast("The data template is not found: " + dataTemplatePath);
+		return;
+	}
+
+	// Получаем содержимое шаблона для данных
+	let dataTemplateContent = await app.vault.read(dataTemplateFile);
+
+	// Формируем имя файла для викторины
+	const quizBaseName = `quiz-${date}.md`;
+	const quizTargetPath = `${quizFolder}/${quizBaseName}`;
+
+	// Загружаем шаблон для вмкторины
+	const quizTemplateFile = app.vault.getAbstractFileByPath(quizTemplatePath);
+	if (!quizTemplateFile) {
+		showToast("The quiz template is not found: " + quizTemplatePath);
+		return;
+	}
+
+	// Получаем содержимое шаблона для викторины
+	let quizTemplateContent = await app.vault.read(quizTemplateFile);
+
+	// Подставляем переменные в файл quiz
+	let quizNoteContent = quizTemplateContent
+	.replace(/{{dataFile}}/g, dataTargetPath)
+	.replace(/{{contentType}}/g, targetFolder)
+	.replace(/{{title}}/g, title);
+
+	// Подставляем переменные в основной файл
+	let noteContent;
+	if (url) {
+		noteContent = templateContent
+		.replace(/{{title}}/g, title)
+		.replace(/{{dataFile}}/g, dataBaseName)
+		.replace(/{{quizFile}}/g, quizBaseName)
+		.replace(/{{url}}/g, url);
+	} else {
+		noteContent = templateContent
+		.replace(/{{title}}/g, title)
+		.replace(/{{dataFile}}/g, dataBaseName)
+		.replace(/{{quizFile}}/g, quizBaseName)
+	}
+
+	// Создаём файл для video
+	await app.vault.create(targetPath, noteContent);
+	// Создаём файл для данных
+	await app.vault.create(dataTargetPath, dataTemplateContent);
+	// Создаём файл для quiz
+	await app.vault.create(quizTargetPath, quizNoteContent);
+
+	let newFile = app.vault.getAbstractFileByPath(targetPath);
+	app.workspace.getLeaf(true).openFile(newFile);
+}

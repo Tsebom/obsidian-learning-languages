@@ -15,11 +15,6 @@ eval(toast);
 eval(home);
 eval(popup);
 
-const dataTemplatePath = "service/template/data.md"; // шаблон
-const dataFolder = "service/data"; // данные
-const quizTemplatePath = "service/template/quiz.md"; // шаблон
-const quizFolder = "service/quiz"; // quiz note
-
 const buttonsContainer = document.createElement("div");
 buttonsContainer.className = "buttons-container";
 
@@ -30,7 +25,6 @@ videoBtn.textContent = "Video";
 videoBtn.addEventListener("click", async () => {
 	const videoTemplatePath = "service/template/video.md"; // шаблон
 	const videoTargetFolder = "Videos"; // куда сохранять
-	const date = getFormattedDate();
 
 	// Читаем буфер обмена
 	let clipboardText = await getClipboard();
@@ -67,76 +61,7 @@ videoBtn.addEventListener("click", async () => {
 		safeTitle = safeTitle.slice(0, 60) + "...";
 	}
 
-	//Формируем имя файла
-	let baseName = `${safeTitle}`;
-	let fileName = `${baseName}.md`;
-	let videoTargetPath = `${videoTargetFolder}/${fileName}`;
-
-	// Проверяем существование файла
-	if (app.vault.getAbstractFileByPath(videoTargetPath)) {
-		showToast(`The file ${videoTargetPath} is existed.`);
-		return;
-	}
-
-	// Загружаем шаблон video
-	const videoTemplateFile = app.vault.getAbstractFileByPath(videoTemplatePath);
-	if (!videoTemplateFile) {
-		showToast("The video template is not found: " + videoTemplatePath);
-		return;
-	}
-
-	// Получаем содержимое шаблона
-	let videoTemplateContent = await app.vault.read(videoTemplateFile);
-
-	// Формируем имя файла для данных
-	const videoDataBaseName = `data-${date}.md`;
-	const videoDataTargetPath = `${dataFolder}/${videoDataBaseName}`;
-
-	// Загружаем шаблон для данными
-	const dataTemplateFile = app.vault.getAbstractFileByPath(dataTemplatePath);
-	if (!dataTemplateFile) {
-		showToast("The data template is not found: " + dataTemplatePath);
-		return;
-	}
-
-	// Получаем содержимое шаблона для данных
-	let dataTemplateContent = await app.vault.read(dataTemplateFile);
-
-	// Формируем имя файла для викторины
-	const videoQuizBaseName = `quiz-${date}.md`;
-	const videoQuizTargetPath = `${quizFolder}/${videoQuizBaseName}`;
-
-	// Загружаем шаблон для вмкторины
-	const quizTemplateFile = app.vault.getAbstractFileByPath(quizTemplatePath);
-	if (!quizTemplateFile) {
-		showToast("The quiz template is not found: " + quizTemplatePath);
-		return;
-	}
-
-	// Получаем содержимое шаблона для викторины
-	let quizTemplateContent = await app.vault.read(quizTemplateFile);
-
-	let quizNoteContent = quizTemplateContent
-	.replace(/{{dataFile}}/g, videoDataTargetPath)
-	.replace(/{{contentType}}/g, videoTargetFolder)
-	.replace(/{{title}}/g, safeTitle);
-
-	// Подставляем переменные
-  let videoNoteContent = videoTemplateContent
-	.replace(/{{title}}/g, safeTitle)
-	.replace(/{{dataFile}}/g, videoDataBaseName)
-	.replace(/{{quizFile}}/g, videoQuizBaseName)
-	.replace(/{{videoUrl}}/g, videoUrl);
-
-	// Создаём файл для video
-	await app.vault.create(videoTargetPath, videoNoteContent);
-	// Создаём файл для данных
-	await app.vault.create(videoDataTargetPath, dataTemplateContent);
-	// Создаём файл для quiz
-	await app.vault.create(videoQuizTargetPath, quizNoteContent);
-
-	let newFile = app.vault.getAbstractFileByPath(videoTargetPath);
-	app.workspace.getLeaf(true).openFile(newFile);
+	createFile(safeTitle, videoTemplatePath, videoTargetFolder, videoUrl);
 });
 
 const articlBtn = document.createElement("button");
@@ -146,7 +71,6 @@ articlBtn.textContent = "Articl";
 articlBtn.addEventListener("click", async () => {
 	const articlTemplatePath = "service/template/articl.md"; // шаблон
 	const articlTargetFolder = "Articls"; // куда сохранять
-	const date = getFormattedDate();
 
 	// Читаем буфер обмена
 	let clipboardText = await getClipboard();
@@ -172,76 +96,7 @@ articlBtn.addEventListener("click", async () => {
 		safeTitle = safeTitle.slice(0, 60) + "...";
 	}
 
-	//Формируем имя файла
-	let baseName = `${safeTitle}`;
-	let fileName = `${baseName}.md`;
-	let articlTargetPath = `${articlTargetFolder}/${fileName}`;
-
-	// Проверяем существование файла
-	if (app.vault.getAbstractFileByPath(articlTargetPath)) {
-		showToast(`The file ${articlTargetPath} is existed.`);
-		return;
-	}
-
-	// Загружаем шаблон articl
-	const articlTemplateFile = app.vault.getAbstractFileByPath(articlTemplatePath);
-	if (!articlTemplateFile) {
-		showToast("The articl template is not found: " + articlTemplatePath);
-		return;
-	}
-
-	// Получаем содержимое шаблона
-	let articlTemplateContent = await app.vault.read(articlTemplateFile);
-
-	// Формируем имя файла для данных
-	const articlDataBaseName = `data-${date}.md`;
-	const articlDataTargetPath = `${dataFolder}/${articlDataBaseName}`;
-
-	// Загружаем шаблон для данными
-	const dataTemplateFile = app.vault.getAbstractFileByPath(dataTemplatePath);
-	if (!dataTemplateFile) {
-		showToast("The data template is not found: " + dataTemplatePath);
-		return;
-	}
-
-	// Получаем содержимое шаблона для данных
-	let dataTemplateContent = await app.vault.read(dataTemplateFile);
-
-	// Формируем имя файла для викторины
-	const articlQuizBaseName = `quiz-${date}.md`;
-	const articlQuizTargetPath = `${quizFolder}/${articlQuizBaseName}`;
-
-	// Загружаем шаблон для викторины
-	const quizTemplateFile = app.vault.getAbstractFileByPath(quizTemplatePath);
-	if (!quizTemplateFile) {
-		showToast("The quiz template is not found: " + quizTemplatePath);
-		return;
-	}
-
-	// Получаем содержимое шаблона для викторины
-	let quizTemplateContent = await app.vault.read(quizTemplateFile);
-
-	let quizNoteContent = quizTemplateContent
-	.replace(/{{dataFile}}/g, articlDataTargetPath)
-	.replace(/{{contentType}}/g, articlTargetFolder)
-	.replace(/{{title}}/g, safeTitle);
-
-	// Подставляем переменные
-  let articlNoteContent = articlTemplateContent
-	.replace(/{{title}}/g, safeTitle)
-	.replace(/{{dataFile}}/g, articlDataBaseName)
-	.replace(/{{quizFile}}/g, articlQuizBaseName)
-	.replace(/{{articlUrl}}/g, clipboardText);
-
-	// Создаём файл для articl
-	await app.vault.create(articlTargetPath, articlNoteContent);
-	// Создаём файл для данных
-	await app.vault.create(articlDataTargetPath, dataTemplateContent);
-	// Создаём файл для quiz
-	await app.vault.create(articlQuizTargetPath, quizNoteContent);
-
-	let newFile = app.vault.getAbstractFileByPath(articlTargetPath);
-	app.workspace.getLeaf(true).openFile(newFile);
+	createFile(safeTitle, articlTemplatePath, articlTargetFolder, clipboardText);
 });
 
 const wordBtn = document.createElement("button");

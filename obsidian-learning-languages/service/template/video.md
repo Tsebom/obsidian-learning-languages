@@ -7,7 +7,7 @@ cssclasses:
 settings: service/settings
 datawords: service/data/{{dataFile}}
 quiz: service/quiz/{{quizFile}}
-link: "{{videoUrl}}"
+link: "{{url}}"
 completed: false
 tags:
   - video

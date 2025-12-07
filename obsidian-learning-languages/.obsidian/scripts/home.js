@@ -36,11 +36,10 @@ window.getFirstH1 = async function (url) {
     const doc = parser.parseFromString(text, "text/html");
     const h1 = doc.querySelector("h1");
 
-    return h1 ? h1.textContent.trim() : "H1 не найден";
+    return h1 ? h1.textContent.trim() : false;
   } catch (e) {
     console.warn("Ошибка загрузки:", url, e);
-    showPopupNewArticleName();
-    return "Не удалось загрузить";
+    return false;
   }
 }
 

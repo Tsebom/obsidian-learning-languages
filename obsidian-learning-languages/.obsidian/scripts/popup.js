@@ -19,10 +19,11 @@ window.hideForm = function() {
 }
 
 // Форма для нового файла
-window.showPopupNewName = function() {
-
-	const wordTemplatePath = "service/template/word.md"
-	const wordTargetFolder = "Words";
+window.showPopupNewName = function(
+	templatePath, // Путь к шаблону файла
+	targetFolder, // Целевая папка	
+	url = "" // Ссылка на изучаемый ресурс (опционально)
+) {
 
 	const form = document.createElement("div");
 	form.style.background = "#333";
@@ -81,7 +82,7 @@ window.showPopupNewName = function() {
 
 		hideForm();
 
-		createFile(safeTitle, wordTemplatePath, wordTargetFolder);
+		createFile(safeTitle, templatePath, targetFolder, url);
 	});
 
 	buttonCansel.addEventListener("click", () => {

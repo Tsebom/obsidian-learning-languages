@@ -2,6 +2,43 @@
  HOME PAGE
 */
 
+.buttons-container {
+	display: flex;
+  flex-wrap: wrap;
+	justify-content: center;
+  gap: 25px;
+	padding: 20px;
+	width: 100%;
+}
+
+.btn {
+	font-weight: bold;
+	border-radius: 5px!important;
+	padding: 20px !important;
+	background-color: var(--input-shadov);
+}
+
+.video-btn {
+	color: var(--color-red) !important;
+	border: 1px solid var(--color-red);
+}
+
+.articl-btn {
+	color: var(--color-green) !important;
+	border: 1px solid var(--color-green);
+}
+
+.word-btn {
+	color: var(--color-orange) !important;
+	border: 1px solid var(--color-orange);
+}
+
+.setting-btn {
+	color: var(--color-blue) !important;
+	border: 1px solid var(--color-blue);
+	padding: 20px 10px !important;
+}
+
 /*
  Quiz
 */

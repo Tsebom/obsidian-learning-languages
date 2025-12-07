@@ -5,7 +5,8 @@
     "fix_banner",
     "properties",
     "sandbox",
-    "widepage"
+    "widepage",
+    "main"
   ],
   "baseFontSize": 21
 }

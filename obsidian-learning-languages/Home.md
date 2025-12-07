@@ -88,15 +88,17 @@ articlBtn.addEventListener("click", async () => {
 	// Получаем название статьи
 	let articlTitle = await getFirstH1(clipboardText);
 
-	if(!articlTitle) return
+	if(!articlTitle) {
+		showPopupNewName(articlTemplatePath, articlTargetFolder, clipboardText);
+	} else {
+		// Ограничиваем длину названия
+		let safeTitle = articlTitle.replace(/[\\\/:*?"<>|']/g, ""); // убираем запрещённые символы
+		if (safeTitle.length > 60) {
+			safeTitle = safeTitle.slice(0, 60) + "...";
+		}
 
-	// Ограничиваем длину названия
-	let safeTitle = articlTitle.replace(/[\\\/:*?"<>|']/g, ""); // убираем запрещённые символы
-	if (safeTitle.length > 60) {
-		safeTitle = safeTitle.slice(0, 60) + "...";
+		createFile(safeTitle, articlTemplatePath, articlTargetFolder, clipboardText);
 	}
-
-	createFile(safeTitle, articlTemplatePath, articlTargetFolder, clipboardText);
 });
 
 const wordBtn = document.createElement("button");
@@ -104,7 +106,10 @@ wordBtn.className = "word-btn btn";
 wordBtn.textContent = "Word";
 
 wordBtn.addEventListener("click", async () => {
-	showPopupNewName();
+	const wordTemplatePath = "service/template/word.md"
+	const wordTargetFolder = "Words";
+
+	showPopupNewName(wordTemplatePath, wordTargetFolder);
 });
 
 const buttonSetting = document.createElement("button");

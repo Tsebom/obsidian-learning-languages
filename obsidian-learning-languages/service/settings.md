@@ -1,7 +1,7 @@
 ---
 banner: "![[settings.jpg]]"
 banner_lock: true
-banner_y: 0.65
+banner_y: 0.29667
 maxgrade: "42"
 wordscountstudy: "7"
 libretranslateHost: localhost:5000

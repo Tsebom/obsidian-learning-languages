@@ -9,7 +9,7 @@ datawords: service/data/{{dataFile}}
 quiz: service/quiz/{{quizFile}}
 completed: false
 tags:
-  - articl
+  - word
 ---
 
 > [!info] COMPLETED: `INPUT[toggle:completed]`

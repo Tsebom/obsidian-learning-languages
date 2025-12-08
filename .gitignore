@@ -1,11 +1,11 @@
-obsidian-learning-languages/Aticls/*
+obsidian-learning-languages/Articls/*
 obsidian-learning-languages/Videos/*
 obsidian-learning-languages/Words/*
 obsidian-learning-languages/service/data/*
 obsidian-learning-languages/service/quiz/*
 
-!obsidian-learning-languages/Aticls/
-!obsidian-learning-languages/Aticls/.gitkeep
+!obsidian-learning-languages/Articls/
+!obsidian-learning-languages/Articls/.gitkeep
 !obsidian-learning-languages/Videos/
 !obsidian-learning-languages/Videos/.gitkeep
 !obsidian-learning-languages/Words/

@@ -126,3 +126,100 @@ buttonsContainer.appendChild(buttonSetting);
 dv.container.appendChild(buttonsContainer);
 
 ```
+
+```dataviewjs
+// Берем все записи
+let allPages = dv.pages();
+
+const container = document.createElement('div');
+container.className = "container";
+
+// Блок video
+let videos = allPages.where(p => p.file.name !== "video" &&  p.file.tags.includes("#video") && p.completed === false); // Отбираем video (completed false)
+let shuffleVideos = shuffleArray(videos).slice(0, 10); // Рандомизируем и ограничиваем до 10
+
+const video = document.createElement('div');
+video.className = "video-box container-item";
+
+const videoTitle = document.createElement('h2');
+videoTitle.className = "video-title";
+videoTitle.innerText = `Video ( ${videos.length} )`;
+
+video.appendChild(videoTitle);
+
+let videoList = document.createElement("ol");
+videoList.className = "video-list";
+
+shuffleVideos.forEach(p => {
+  let li = document.createElement("li");
+  let a = document.createElement("a");
+  a.href = "obsidian://open?vault=" + app.vault.getName() + "&file=" + p.file.path;
+  a.innerText = p.file.name;
+  li.appendChild(a);
+  videoList.appendChild(li);
+});
+
+video.appendChild(videoList);
+
+// Блок articl
+let articls = allPages.where(p => p.file.name !== "articl" &&  p.file.tags.includes("#articl") && p.completed === false); // Отбираем articl (completed false)
+let shuffleArticl = shuffleArray(articls).slice(0, 10); // Рандомизируем и ограничиваем до 10
+
+const articl = document.createElement('div');
+articl.className = "articl-box container-item";
+
+const articlTitle = document.createElement('h2');
+articlTitle.className = "articl-title";
+articlTitle.innerText = `Articl ( ${articls.length} )`;
+
+articl.appendChild(articlTitle);
+
+let articlList = document.createElement("ol");
+articlList.className = "video-list";
+
+shuffleArticl.forEach(p => {
+  let li = document.createElement("li");
+  let a = document.createElement("a");
+  a.href = "obsidian://open?vault=" + app.vault.getName() + "&file=" + p.file.path;
+  a.innerText = p.file.name;
+  li.appendChild(a);
+  articlList.appendChild(li);
+});
+
+articl.appendChild(articlList);
+
+// Блок word
+let words = allPages.where(p => p.file.name !== "word" &&  p.file.tags.includes("#word") && p.completed === false); // Отбираем word (completed false)
+let shuffleWord = shuffleArray(words).slice(0, 10); // Рандомизируем и ограничиваем до 10
+
+const word = document.createElement('div');
+word.className = "word-box container-item";
+
+const wordTitle = document.createElement('h2');
+wordTitle.className = "word-title";
+wordTitle.innerText = `Word ( ${words.length} )`;
+
+word.appendChild(wordTitle);
+
+let wordList = document.createElement("ol");
+wordList.className = "word-list";
+
+shuffleWord.forEach(p => {
+  let li = document.createElement("li");
+  let a = document.createElement("a");
+  a.href = "obsidian://open?vault=" + app.vault.getName() + "&file=" + p.file.path;
+  a.innerText = p.file.name;
+  li.appendChild(a);
+  wordList.appendChild(li);
+});
+
+word.appendChild(wordList);
+
+// Добавляем блоки в контейнер
+container.appendChild(video);
+container.appendChild(articl);
+container.appendChild(word);
+
+dv.container.appendChild(container);
+
+```

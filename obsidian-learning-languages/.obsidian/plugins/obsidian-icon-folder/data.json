@@ -6,6 +6,7 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "LiHome",
       "LiAlbum",
       "LiWholeWord",
       "LiVideo",
@@ -33,8 +34,24 @@
     "debugMode": false,
     "useInternalPlugins": false
   },
-  "service": "LiSettings",
-  "Videos": "LiVideo",
-  "Words": "LiWholeWord",
-  "Articls": "LiAlbum"
+  "service": {
+    "iconName": "LiSettings",
+    "iconColor": "#0033ff"
+  },
+  "Videos": {
+    "iconName": "LiVideo",
+    "iconColor": "#f80d0d"
+  },
+  "Words": {
+    "iconName": "LiWholeWord",
+    "iconColor": "#fd9f1c"
+  },
+  "Articls": {
+    "iconName": "LiAlbum",
+    "iconColor": "#1eff00"
+  },
+  "Home.md": {
+    "iconName": "LiHome",
+    "iconColor": "#01febf"
+  }
 }

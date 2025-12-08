@@ -135,3 +135,8 @@ window.createFile = async function(
 	let newFile = app.vault.getAbstractFileByPath(targetPath);
 	app.workspace.getLeaf(true).openFile(newFile);
 }
+
+// Функция для случайного перемешивания массива
+window.shuffleArray = function(array) {
+    return array.sort(() => Math.random() - 0.5);
+}

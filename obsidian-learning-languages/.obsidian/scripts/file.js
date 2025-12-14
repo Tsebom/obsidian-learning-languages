@@ -1,4 +1,4 @@
-// Добавляем фтрибут и данные в файл
+// Добавляем атрибут и данные в файл
 // file: Tfile - объект файла в который записываем данные
 // attribute: string - наименование атрибута в котором хранятся данные
 // data: string - данные записываемые в файл
@@ -31,7 +31,6 @@ window.writeData = async function(file, attribute, data) {
 		content = lines.join("\n") + body;
 	} else {
 		content = `---\n${attribute}: ${data}\n---`
-		content = content + body;
 	}
 
 	await app.vault.modify(file, content);

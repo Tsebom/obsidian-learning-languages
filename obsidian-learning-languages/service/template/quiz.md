@@ -1,7 +1,7 @@
 ---
 banner_y: 0.49333
 banner_lock: true
-banner: "![[crayons.jpg]]"
+banner: "![[quiz.jpg]]"
 cssclasses:
   - wide-85
 tags:

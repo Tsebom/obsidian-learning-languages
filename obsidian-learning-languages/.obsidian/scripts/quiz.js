@@ -7,6 +7,10 @@ window.getWordForStudy = function(wordsForStudy, wordForRepeate, studyWords, wor
 	let word;
 
 	while(studyWords.length < wordsCountStudy) {
+		if(wordsForStudy.length === 0 && wordForRepeate.length === 0) {
+			showToast(`There are no words to learn. Please add at least ${wordsCountStudy} words!`, 3000);
+			return;
+		}
 		if(wordsForStudy.length !== 0) {
 			word = getRandomWord(wordsForStudy);
 			wordsForStudy = deleteWordFromList(word, wordsForStudy);
@@ -36,10 +40,9 @@ window.getRandomWord = function(list) {
 	return list[Math.floor(Math.random() * list.length)];
 }
 
-// Создаем quiz
-window.quizLoop = function() {
+// Заполняет поле вопроса и кнопки контентом
+window.getQuiz = function() {
 	const wordsQuestion = [];
-	let click = true;
 
 	while(wordsQuestion.length < 4) {
 		let word = getRandomWord(studyWords);
@@ -52,46 +55,73 @@ window.quizLoop = function() {
 
 	const wordQuestion = getRandomWord(wordsQuestion);
 	questionWord.innerText = wordQuestion.translate;
+	questionWord.dataset.word = wordQuestion.word;
 
-	wordsQuestion.forEach(word => {
-		const button = document.createElement("button");
-		button.className = "quiz-answer-button";
-		button.textContent = word.word;
+	button1.textContent = wordsQuestion[0].word;
+	button2.textContent = wordsQuestion[1].word;
+	button3.textContent = wordsQuestion[2].word;
+	button4.textContent = wordsQuestion[3].word;
+}
 
-		answerContainer.appendChild(button);
+// Очищает поле вопроса и кнопки от контента
+window.cleanQuiz = function() {
+	questionWord.innerText = "";
 
-		button.addEventListener("click", () => {
-			if(click === false) return;
-			click = false;
-			if(word.word === wordQuestion.word) {
-				button.style.backgroundColor = "var(--color-green)";
-				button.style.color = "var(--color-base-00)";
-				if(wordQuestion.statistics.grade < maxgrade) {
-					wordQuestion.statistics.grade = wordQuestion.statistics.grade + 1;
-				}
-			} else {
-				button.style.backgroundColor = "var(--color-red)";
-				button.style.color = "var(--color-base-00)";
-
-				const buttonList = Array.from(document.getElementsByClassName("quiz-answer-button"));
-				buttonList.forEach(button => {
-					if(button.textContent === wordQuestion.word) {
-						button.style.backgroundColor = "var(--color-green)";
-						button.style.color = "var(--color-base-00)";
-					}
-				});
-
-				if(wordQuestion.statistics.grade > 0 && wordQuestion.statistics.grade < maxgrade) {
-					wordQuestion.statistics.grade = wordQuestion.statistics.grade - 1;
-				}
-
-				if(wordQuestion.statistics.grade === maxgrade) {
-					wordQuestion.statistics.grade = Math.floor(wordQuestion.statistics.grade / 2);
-				}
-			}
-
-			writeData(dataFile,`word-${wordQuestion.word}`, JSON.stringify(wordQuestion));
-		});
-
+	const button = Array.from(document.getElementsByClassName("quiz-answer-button"));
+	button.forEach(btn => {
+		btn.textContent = "";
+		btn.style.backgroundColor = "";
+		btn.style.color = "";
 	});
+}
+
+// Получение из списка объект слова
+// list: list[object] - список слов
+// word: string - слово искомого объекта
+window.getWordFromList = function(list, word) {
+	const wObj = list.find(w => w.word === word);
+	return wObj;
+}
+
+// Проверка правильности ответа
+// button - нажатая кнопка
+window.cheakAnswer = function(button) {
+	const question = getWordFromList(studyWords, questionWord.dataset.word);
+	
+	const answer = button.textContent;
+	if(answer === question.word) {
+		button.style.backgroundColor = "var(--color-green)";
+		button.style.color = "var(--color-base-00)";
+
+		if(question.statistics.grade < maxgrade) {
+			question.statistics.grade = question.statistics.grade + 1;
+		}
+
+		if(question.statistics.grade === Number(maxgrade)) {
+			saveResult(question);
+			return;
+		}
+	} else {
+		button.style.backgroundColor = "var(--color-red)";
+		button.style.color = "var(--color-base-00)";
+
+		if(question.statistics.grade > 0 && question.statistics.grade < maxgrade) {
+			question.statistics.grade = question.statistics.grade - 1;
+		}
+
+		if(question.statistics.grade === Number(maxgrade)) {
+			question.statistics.grade = Math.floor(question.statistics.grade / 2);
+			saveResult(question);
+			return;
+		}
+	}
+	setTimeout(() => cleanQuiz(), 1000);
+	setTimeout(() => getQuiz(), 1000);
+}
+
+// Сохраняем результат изучения
+window.saveResult = async function(word="") {
+	for (const w of studyWords) {
+		await writeData(dataFile, `word-${w.word}`, JSON.stringify(w));
+	}
 }

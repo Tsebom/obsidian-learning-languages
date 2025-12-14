@@ -25,6 +25,11 @@ window.getFormattedDate = function() {
   return `${day}.${month}.${year}-${hours}-${minutes}-${seconds}`;
 }
 
+// Функция для случайного перемешивания массива
+window.shuffleArray = function(array) {
+    return array.sort(() => Math.random() - 0.5);
+}
+
 window.getFirstH1 = async function (url) {
   try {
     // Используем встроенный requestUrl — работает в Obsidian БЕЗ CORS!
@@ -134,9 +139,4 @@ window.createFile = async function(
 
 	let newFile = app.vault.getAbstractFileByPath(targetPath);
 	app.workspace.getLeaf(true).openFile(newFile);
-}
-
-// Функция для случайного перемешивания массива
-window.shuffleArray = function(array) {
-    return array.sort(() => Math.random() - 0.5);
 }

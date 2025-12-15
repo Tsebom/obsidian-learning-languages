@@ -173,6 +173,14 @@ function cleanQuiz() {
 	});
 }
 
+// Получение из списка объект слова
+// list: list[object] - список слов
+// word: string - слово искомого объекта
+function getWordFromList(list, word) {
+	const wObj = list.find(w => w.word === word);
+	return wObj;
+}
+
 // Проверка правильности ответа
 // button - нажатая кнопка
 function cheakAnswer(button) {

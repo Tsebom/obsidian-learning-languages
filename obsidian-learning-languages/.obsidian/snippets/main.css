@@ -308,7 +308,25 @@
 	flex: 0 0 auto;
 }
 
-.word-container,
+.word-container {
+	margin-right: 15px;
+	margin-left: 20px;
+	flex: 1 1 0;
+	min-width: 0;
+	border-left: 2px solid var(--text-muted);
+	border-right: 2px solid var(--text-muted);
+	padding-left: 10px;
+}
+
+.translate-container {
+	margin-right: 15px;
+	margin-left: 20px;
+	flex: 1 1 0;
+	min-width: 0;
+	border-right: 2px solid var(--text-muted);
+	padding-left: 10px;
+}
+
 .phrase-container {
 	margin-right: 15px;
 	margin-left: 20px;

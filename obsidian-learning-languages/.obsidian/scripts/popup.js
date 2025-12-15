@@ -152,3 +152,72 @@ window.showPopupDeleteFile = function(message, quizFile, dataFile, thisFile) {
 
 	showForm(form);
 }
+
+/////////////////////
+window.showPopupEditTranslate = function(message, word, dataFile) {
+
+	const form = document.createElement("div");
+	form.style.background = "#333";
+	form.style.fontSize= "30px";
+	form.style.padding = "20px 25px";
+	form.style.borderRadius = "10px";
+	form.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
+	form.style.fontFamily = "sans-serif";
+	form.style.opacity = "0";
+	form.style.transform = "translateY(-20px)";
+	form.style.transition = "opacity 0.3s, transform 0.3s";
+	form.style.minWidth = "700px";
+
+	const title = document.createElement("h1");
+	title.innerText = message;
+	title.style.marginBottom = "10px";
+	title.style.fontSize = "18px";
+	title.style.fontWeight = "bold";
+
+	const inputName = document.createElement("input");
+	inputName.value = word.translate;
+	inputName.style.width = "100%";
+	inputName.style.height = "40px";
+	inputName.style.marginBottom = "10px";
+	inputName.style.fontSize = "18px";
+	inputName.style.paddingLeft = "18px";
+
+	const buttonContainer = document.createElement("div");
+	buttonContainer.style.display = "flex";
+	buttonContainer.style.justifyContent = "flex-end";
+	buttonContainer.style.gap = "10px";
+
+	const buttonEdit = document.createElement("button");
+	buttonEdit.innerText = "Edit";
+	buttonEdit.style.border = "1px solid rgba(0,0,0,0.2)";
+	buttonEdit.style.background = "var(--interactive-accent)";
+	buttonEdit.style.fontWeight = "bold";
+
+	const buttonCansel = document.createElement("button");
+	buttonCansel.innerText = "Cansel";
+	buttonCansel.style.border = "1px solid rgba(0,0,0,0.2)";
+	buttonCansel.style.background = "var(--background-modifier-error)";
+	buttonCansel.style.fontWeight = "bold";
+
+	buttonContainer.appendChild(buttonEdit);
+	buttonContainer.appendChild(buttonCansel);
+
+	form.appendChild(title);
+	form.appendChild(inputName);
+	form.appendChild(buttonContainer);
+
+	buttonEdit.addEventListener("click", async () => {
+		const translate = inputName.value.trim().trim();
+		word.translate = translate;
+		await writeData(dataFile, `word-${word.word}`, JSON.stringify(word))
+		hideForm();
+	});
+
+	buttonCansel.addEventListener("click", () => {
+		hideForm();
+	});
+
+	popupContainer.appendChild(form);
+
+	showForm(form);
+}

@@ -128,6 +128,10 @@ dv.container.appendChild(buttonsContainer);
 ```
 
 ```dataviewjs
+const home = await app.vault.adapter.read(".obsidian/scripts/home.js");
+
+eval(home);
+
 // Берем все записи
 let allPages = dv.pages();
 

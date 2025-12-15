@@ -136,4 +136,84 @@ answerContainer.appendChild(button3);
 answerContainer.appendChild(button4);
 
 getQuiz();
+
+// Заполняет поле вопроса и кнопки контентом
+function getQuiz() {
+	const wordsQuestion = [];
+
+	while(wordsQuestion.length < 4) {
+		let word = getRandomWord(studyWords);
+
+		let exist = wordsQuestion.some(item => item.word === word.word);
+		if(!exist) {
+			wordsQuestion.push(word);
+		}
+	}
+
+	const wordQuestion = getRandomWord(wordsQuestion);
+	questionWord.innerText = wordQuestion.translate;
+	questionWord.dataset.word = wordQuestion.word;
+	console.log({wordQuestion})
+
+	button1.textContent = wordsQuestion[0].word;
+	button2.textContent = wordsQuestion[1].word;
+	button3.textContent = wordsQuestion[2].word;
+	button4.textContent = wordsQuestion[3].word;
+}
+
+// Очищает поле вопроса и кнопки от контента
+function cleanQuiz() {
+	questionWord.innerText = "";
+
+	const buttons = Array.from(document.getElementsByClassName("quiz-answer-button"));
+	buttons.forEach(btn => {
+		btn.textContent = "";
+		btn.style.backgroundColor = "";
+		btn.style.color = "";
+	});
+}
+
+// Проверка правильности ответа
+// button - нажатая кнопка
+function cheakAnswer(button) {
+	const question = getWordFromList(studyWords, questionWord.dataset.word);
+	
+	const answer = button.textContent;
+
+	if(answer === question.word) {
+		button.style.backgroundColor = "var(--color-green)";
+		button.style.color = "var(--color-base-00)";
+
+		if(question.statistics.grade < maxgrade) {
+			question.statistics.grade = question.statistics.grade + 1;
+		}
+
+		if(question.statistics.grade === Number(maxgrade)) {
+			saveResult(question);
+			return;
+		}
+	} else {
+		button.style.backgroundColor = "var(--color-red)";
+		button.style.color = "var(--color-base-00)";
+
+		if(question.statistics.grade > 0 && question.statistics.grade < maxgrade) {
+			question.statistics.grade = question.statistics.grade - 1;
+		}
+
+		if(question.statistics.grade === Number(maxgrade)) {
+			question.statistics.grade = Math.floor(question.statistics.grade / 2);
+			saveResult(question);
+			return;
+		}
+	}
+	setTimeout(() => cleanQuiz(), 1000);
+	setTimeout(() => getQuiz(), 1100);
+}
+
+// Сохраняем результат изучения
+async function saveResult() {
+	for (const w of studyWords) {
+		await writeData(dataFile, `word-${w.word}`, JSON.stringify(w));
+	}
+}
 ```

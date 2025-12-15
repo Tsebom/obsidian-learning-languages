@@ -41,9 +41,17 @@ window.createRow = function(data, type) {
 	textContainer.className = isWord ? "word-container" : "phrase-container";
 	textContainer.innerText = textValue;
 
+	// Кнопка редактирования перевода
+	const editButton = document.createElement("button");
+	editButton.className = "word-btn word-edit-btn";
+	editButton.textContent = "✏️...";
+	editButton.addEventListener("click", () => {
+		showPopupEditTranslate(`Edit translate for word "${data.word}":`, data, dataFile);
+	});
+
 	// Контейнер для перевода
 	const translateContainer = document.createElement("div");
-	translateContainer.className = isWord ? "word-container" : "phrase-container";
+	translateContainer.className = isWord ? "translate-container" : "phrase-container";
 	translateContainer.innerText = translateValue;
 
 	// Кнопка удаления
@@ -132,6 +140,9 @@ window.createRow = function(data, type) {
 	}
 
 	rowContainer.appendChild(textContainer);
+	if (isWord) {
+		rowContainer.appendChild(editButton);
+	}
 	rowContainer.appendChild(translateContainer);
 	rowContainer.appendChild(deleteBtn);
 

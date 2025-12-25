@@ -30,6 +30,7 @@ window.shuffleArray = function(array) {
     return array.sort(() => Math.random() - 0.5);
 }
 
+// Получает заголовок h1 с веб-страницы
 window.getFirstH1 = async function (url) {
   try {
     // Используем встроенный requestUrl — работает в Obsidian БЕЗ CORS!
@@ -48,6 +49,7 @@ window.getFirstH1 = async function (url) {
   }
 }
 
+// Создает файл на основе шаблона
 window.createFile = async function(
 	title, // Название файла
 	templatePath, // Путь к шаблону файла
@@ -140,3 +142,46 @@ window.createFile = async function(
 	let newFile = app.vault.getAbstractFileByPath(targetPath);
 	app.workspace.getLeaf(true).openFile(newFile);
 }
+
+// Создает файл книги на основе шаблона
+window.createBookFile = async function(
+	title, // Название файла
+	templatePath, // Путь к шаблону файла
+	targetFolder, // Целевая папка	
+	description = "" // Описание книги
+) {
+	//Формируем имя файла
+	let baseName = `${title}`;
+	let fileName = `${baseName}.md`;
+	let targetPath = `${targetFolder}/${fileName}`;
+
+	// Проверяем существование файла
+	if (app.vault.getAbstractFileByPath(targetPath)) {
+		showToast(`The file "${targetPath}" is existed.`);
+		return;
+	}
+
+	// Загружаем шаблон
+	const templateFile = app.vault.getAbstractFileByPath(templatePath);
+	if (!templateFile) {
+		showToast("The template is not found: " + templatePath);
+		return;
+	}
+
+	// Получаем содержимое шаблона
+	let templateContent = await app.vault.read(templateFile);
+
+	// Подставляем переменные в основной файл
+	let noteContent = templateContent
+		.replace(/{{title}}/g, title)
+		.replace(/{{title}}/g, title)
+		.replace(/{{description}}/g, description);
+
+	// Создаём файл для 
+	await app.vault.createFolder(`Books/BooksData/${title}`);
+	await app.vault.create(targetPath, noteContent);
+
+	let newFile = app.vault.getAbstractFileByPath(targetPath);
+	app.workspace.getLeaf(true).openFile(newFile);
+}
+

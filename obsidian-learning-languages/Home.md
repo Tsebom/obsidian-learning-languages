@@ -10,10 +10,12 @@ cssclasses:
 const toast = await app.vault.adapter.read(".obsidian/scripts/toast.js");
 const home = await app.vault.adapter.read(".obsidian/scripts/home.js");
 const popup = await app.vault.adapter.read(".obsidian/scripts/popup.js");
+const file = await app.vault.adapter.read(".obsidian/scripts/file.js");
 
 eval(toast);
 eval(home);
 eval(popup);
+eval(file);
 
 const buttonsContainer = document.createElement("div");
 buttonsContainer.className = "buttons-container";
@@ -112,6 +114,17 @@ wordBtn.addEventListener("click", async () => {
 	showPopupNewName(wordTemplatePath, wordTargetFolder);
 });
 
+const bookBtn = document.createElement("button");
+bookBtn.className = "book-btn btn";
+bookBtn.textContent = "Book";
+
+bookBtn.addEventListener("click", async () => {
+	const bookTemplatePath = "service/template/book.md"
+	const bookTargetFolder = "Books";
+
+	showPopupNewBook(bookTemplatePath, bookTargetFolder);
+});
+
 const buttonSetting = document.createElement("button");
 buttonSetting.className = "setting-btn btn";
 buttonSetting.textContent = "⚙️";
@@ -121,6 +134,7 @@ buttonSetting.onclick = () => app.workspace.openLinkText("service/settings", "/"
 buttonsContainer.appendChild(videoBtn);
 buttonsContainer.appendChild(articlBtn);
 buttonsContainer.appendChild(wordBtn);
+buttonsContainer.appendChild(bookBtn);
 buttonsContainer.appendChild(buttonSetting);
 
 dv.container.appendChild(buttonsContainer);
@@ -137,6 +151,7 @@ let allPages = dv.pages();
 
 const container = document.createElement('div');
 container.className = "container";
+container.style.marginBottom = "20px";
 
 // Блок video
 let videos = allPages.where(p => p.file.name !== "video" &&  p.file.tags.includes("#video") && p.completed === false); // Отбираем video (completed false)
@@ -193,7 +208,7 @@ shuffleArticl.forEach(p => {
 articl.appendChild(articlList);
 
 // Блок word
-let words = allPages.where(p => p.file.name !== "word" &&  p.file.tags.includes("#word") && p.completed === false); // Отбираем word (completed false)
+let words = allPages.where(p => p.file.name !== "word" &&  p.file.name !== "book-chapter" &&  p.file.tags.includes("#word") && p.completed === false); // Отбираем word (completed false)
 let shuffleWord = shuffleArray(words).slice(0, 10); // Рандомизируем и ограничиваем до 10
 
 const word = document.createElement('div');
@@ -227,3 +242,31 @@ container.appendChild(word);
 dv.container.appendChild(container);
 
 ```
+
+```dataviewjs
+const vaultName = app.vault.getName();
+
+const container = document.createElement('div');
+container.className = "book-container";
+container.style.marginBottom = "20px";
+
+let pages = dv.pages().where(p => p.tags && p.tags.includes("book") && p.completed === false && p.file.path !== "service/template/book.md");
+
+let books = "";
+
+for (let page of pages) {
+	let pathImg = `service/book-cover/${page.file.name}.jpg`;
+	let path = page.file.path;
+	books += 
+        `<div class="book__item">
+	        <a href="obsidian://open?vault=${vaultName}&file=${path}">
+	         <img src="${pathImg}" alt="${page.file.name}"/>
+	        </a>
+         </div>
+        `;
+}
+
+dv.el("div", books, { cls: "books__container", st: "display: flex; flex-wrap: wrap; gap: 25px;"});
+
+```
+

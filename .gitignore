@@ -1,18 +1,52 @@
+#Articls
 obsidian-learning-languages/Articls/*
-obsidian-learning-languages/Videos/*
-obsidian-learning-languages/Words/*
-obsidian-learning-languages/service/data/*
-obsidian-learning-languages/service/quiz/*
-
 !obsidian-learning-languages/Articls/
 !obsidian-learning-languages/Articls/.gitkeep
+
+#Videos
+obsidian-learning-languages/Videos/*
 !obsidian-learning-languages/Videos/
 !obsidian-learning-languages/Videos/.gitkeep
+
+#Words
+obsidian-learning-languages/Words/*
 !obsidian-learning-languages/Words/
 !obsidian-learning-languages/Words/.gitkeep
+
+#Books
+obsidian-learning-languages/Books/*
+!obsidian-learning-languages/Books/
+!obsidian-learning-languages/Books/.gitkeep
+!obsidian-learning-languages/Books/Английский артикль в речевых ситуациях.md
+
+#BooksFile
+obsidian-learning-languages/Books/BooksFile/*
+!obsidian-learning-languages/Books/BooksFile/
+!obsidian-learning-languages/Books/BooksFile/.gitkeep
+!obsidian-learning-languages/Books/BooksFile/Английский артикль в речевых ситуациях.pdf
+
+#BooksData
+obsidian-learning-languages/Books/BooksData/*
+obsidian-learning-languages/Books/BooksData/Английский артикль в речевых ситуациях/*
+!obsidian-learning-languages/Books/BooksData/
+!obsidian-learning-languages/Books/BooksData/.gitkeep
+!obsidian-learning-languages/Books/BooksData/Английский артикль в речевых ситуациях/
+!obsidian-learning-languages/Books/BooksData/Английский артикль в речевых ситуациях/.gitkeep
+
+#service/data
+obsidian-learning-languages/service/data/*
 !obsidian-learning-languages/service/data/
 !obsidian-learning-languages/service/data/.gitkeep
+
+#service/quiz
+obsidian-learning-languages/service/quiz/*
 !obsidian-learning-languages/service/quiz/
 !obsidian-learning-languages/service/quiz/.gitkeep
+
+#service/book-cover
+obsidian-learning-languages/service/book-cover/*
+!obsidian-learning-languages/service/book-cover/
+!obsidian-learning-languages/service/book-cover/.gitkeep
+!obsidian-learning-languages/service/book-cover/Английский артикль в речевых ситуациях.jpg
 
 obsidian-learning-languages/.obsidian/workspace.json

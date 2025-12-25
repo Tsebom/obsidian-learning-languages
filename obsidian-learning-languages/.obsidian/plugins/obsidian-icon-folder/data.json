@@ -6,11 +6,11 @@
     "emojiStyle": "native",
     "iconColor": null,
     "recentlyUsedIcons": [
+      "LiBook",
+      "LiBookA",
       "LiHome",
       "LiAlbum",
-      "LiWholeWord",
-      "LiVideo",
-      "LiSettings"
+      "LiWholeWord"
     ],
     "recentlyUsedIconsSize": 5,
     "rules": [],
@@ -36,22 +36,26 @@
   },
   "service": {
     "iconName": "LiSettings",
-    "iconColor": "#0033ff"
+    "iconColor": "#027aff"
   },
   "Videos": {
     "iconName": "LiVideo",
-    "iconColor": "#f80d0d"
+    "iconColor": "#fb464c"
   },
   "Words": {
     "iconName": "LiWholeWord",
-    "iconColor": "#fd9f1c"
+    "iconColor": "#e9973f"
   },
   "Articls": {
     "iconName": "LiAlbum",
-    "iconColor": "#1eff00"
+    "iconColor": "#44cf65"
   },
   "Home.md": {
     "iconName": "LiHome",
     "iconColor": "#01febf"
+  },
+  "Books": {
+    "iconName": "LiBook",
+    "iconColor": "#a879cb"
   }
 }

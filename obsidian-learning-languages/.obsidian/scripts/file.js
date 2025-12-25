@@ -82,3 +82,22 @@ window.deleteData = async function(file, attribute) {
 window.readData = async function (file, attribute) {
 	return await meta.getPropertyValue(attribute, file);
 }
+
+// Удаляет папку со всем содержимым
+window.deleteFolder = async function(path) {
+	const files = app.vault.getFiles().filter(f => f.path.startsWith(path));
+
+	for (const file of files) {
+		await app.vault.delete(file);
+	}
+
+	await app.vault.adapter.rmdir(path, true);
+}
+
+// Сохраняет файлы в заданую директорию
+window.saveFileToVault = async function (file, fileName, folderPath) {
+	const arrayBuffer = await file.arrayBuffer();
+	const filePath = `${folderPath}/${fileName}`;
+
+	await app.vault.adapter.writeBinary(filePath, arrayBuffer);
+};

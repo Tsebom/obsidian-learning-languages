@@ -219,7 +219,7 @@ function cheakAnswer(button) {
 }
 
 // Сохраняем результат изучения
-async function saveResult() {
+window.saveResult = async function () {
 	for (const w of studyWords) {
 		await writeData(dataFile, `word-${w.word}`, JSON.stringify(w));
 	}

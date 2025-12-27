@@ -94,7 +94,13 @@ window.showPopupNewName = function(
 	showForm(form);
 }
 
-window.showPopupDeleteFile = function(message, quizFile, dataFile, thisFile) {
+// Подтверждение удаления файла
+window.showPopupDeleteFile = function(
+	message, // Сообщение на подтверждение
+	quizFile, // Удаляемый файл quiz
+	dataFile, // Удаляемый файл data
+	thisFile // Удаляемый файл
+) {
 
 	const form = document.createElement("div");
 	form.style.background = "#333";
@@ -153,7 +159,12 @@ window.showPopupDeleteFile = function(message, quizFile, dataFile, thisFile) {
 	showForm(form);
 }
 
-window.showPopupEditTranslate = function(message, word, dataFile) {
+// Форма запроса на изменение перевода слова
+window.showPopupEditTranslate = function(
+	message, // Поясняющее сообщение
+	word, // Слово для которого изменяется перевод
+	dataFile // Файл с данными
+) {
 
 	const form = document.createElement("div");
 	form.style.background = "#333";
@@ -221,6 +232,7 @@ window.showPopupEditTranslate = function(message, word, dataFile) {
 	showForm(form);
 }
 
+// Форма для добавления новой книги
 window.showPopupNewBook = function(
 	templatePath, // Путь к шаблону файла
 	targetFolder, // Целевая папка

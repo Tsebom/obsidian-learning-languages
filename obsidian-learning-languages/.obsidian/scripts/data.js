@@ -23,10 +23,24 @@ window.getWord = function(file, word) {
 	return page[attribute];
 }
 
+// Получем язык источник и целевой
+window.directionTranslate = function() {
+	const setting = dv.page("service/settings.md");
+
+	const source = setting.source_language;
+	const target = setting.target_language;
+	return {
+		source: source,
+		target:target
+	}
+}
+
 // Возвращает ответ с сервера Libretranslate в формате JSON
 // text: string - слово или фраза для перевода
 window.getTranslation = async function(text) {
 	try {
+		const settingLanguage = directionTranslate();
+
 		// Создаем AbortController для таймаута
 		const controller = new AbortController();
 		const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 секунд таймаут
@@ -35,8 +49,8 @@ window.getTranslation = async function(text) {
 			method: "POST",
 			body: JSON.stringify({
 				q: text,
-				source: "en",
-				target: "ru",
+				source: settingLanguage.source,
+				target: settingLanguage.target,
 				format: "text",
 				alternatives: 3,
 				api_key: API_KEY || undefined // убираем пустой ключ

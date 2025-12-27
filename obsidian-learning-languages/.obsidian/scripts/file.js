@@ -95,6 +95,9 @@ window.deleteFolder = async function(path) {
 }
 
 // Сохраняет файлы в заданую директорию
+// file: object file - объект файла из которого читаются данные
+// fileName: string - имя файла
+// folderPath: string - путь к папке назначения
 window.saveFileToVault = async function (file, fileName, folderPath) {
 	const arrayBuffer = await file.arrayBuffer();
 	const filePath = `${folderPath}/${fileName}`;

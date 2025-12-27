@@ -169,7 +169,7 @@ window.highlightRow = function(row) {
 window.createPartsOfSpeech = function(item = words[0]) {
 	const meanings = item?.definition?.meanings ?? [];
 
-	if (!meanings || meanings.length === 0) {
+	if (meanings.length === 0) {
 		return null;
 	}
 

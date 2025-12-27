@@ -95,10 +95,10 @@ const completed = await meta.getPropertyValue("completed", thisFile.mainFile);
 
 if(listWords.length === wordForRepeate.length && !completed) {
 	await meta.update("completed", true, thisFile.mainFile);
-	showToast("Quiz is complited", 3000);
+	showToast("Quiz is completed", 3000);
 	app.workspace.openLinkText(thisFile.mainFile, '/', false);
 } else if(listWords.length === wordForRepeate.length && completed) {
-	showToast("Quiz is complited", 3000);
+	showToast("Quiz is completed", 3000);
 }
 
 // Заполняем список слов на изучении и добавляем ему слова

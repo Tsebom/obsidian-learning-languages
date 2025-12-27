@@ -99,7 +99,7 @@ window.getDefinition = async function(word) {
 	try {
 		// Создаем AbortController для таймаута
 		const controller = new AbortController();
-		const timeoutId = setTimeout(() => controller.abort(), 5000); // 15 секунд таймаут
+		const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 секунд таймаут
 
 		const res = await fetch(
 			`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`,

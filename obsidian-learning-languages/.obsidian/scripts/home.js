@@ -26,11 +26,13 @@ window.getFormattedDate = function() {
 }
 
 // Функция для случайного перемешивания массива
+// array: array - перемешиваемый массив
 window.shuffleArray = function(array) {
     return array.sort(() => Math.random() - 0.5);
 }
 
 // Получает заголовок h1 с веб-страницы
+// url: string - url веб-страницы
 window.getFirstH1 = async function (url) {
   try {
     // Используем встроенный requestUrl — работает в Obsidian БЕЗ CORS!

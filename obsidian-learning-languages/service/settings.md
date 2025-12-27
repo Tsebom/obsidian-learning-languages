@@ -6,7 +6,7 @@ maxgrade: "42"
 wordscountstudy: "7"
 libretranslateHost: localhost:5000
 API_KEY:
-sourse_language: en
+source_language: en
 target_language: ru
 ---
 > [!info] Maxgrade: `INPUT[text:maxgrade]`
@@ -21,15 +21,8 @@ target_language: ru
 > [!info] API_KEY: `INPUT[text:API_KEY]`
 > Устанавливает API key для Libretranslate.
 
-> [!info] Sourse language: `INPUT[text:sourse_language]`
+> [!info] Sourсe language: `INPUT[text:sourse_language]`
 > Изучаемый язык.
 
 > [!info] Target language: `INPUT[text:target_language]`
 > Родной язык.
-
-
-
-
-
-
-

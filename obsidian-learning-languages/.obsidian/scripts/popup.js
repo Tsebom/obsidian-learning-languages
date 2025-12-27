@@ -54,20 +54,20 @@ window.showPopupNewName = function(
 	buttonSave.style.background = "var(--interactive-accent)";
 	buttonSave.style.fontWeight = "bold";
 
-	const buttonCansel = document.createElement("button");
-	buttonCansel.innerText = "Cansel";
-	buttonCansel.style.border = "1px solid rgba(0,0,0,0.2)";
-	buttonCansel.style.background = "var(--background-modifier-error)";
-	buttonCansel.style.fontWeight = "bold";
+	const buttonCancel = document.createElement("button");
+	buttonCancel.innerText = "Cancel";
+	buttonCancel.style.border = "1px solid rgba(0,0,0,0.2)";
+	buttonCancel.style.background = "var(--background-modifier-error)";
+	buttonCancel.style.fontWeight = "bold";
 
 	buttonContainer.appendChild(buttonSave);
-	buttonContainer.appendChild(buttonCansel);
+	buttonContainer.appendChild(buttonCancel);
 
 	form.appendChild(inputName);
 	form.appendChild(buttonContainer);
 
 	buttonSave.addEventListener("click", async () => {
-		const noteTitle = inputName.value.trim().trim();
+		const noteTitle = inputName.value.trim();
 
 		// Ограничиваем длину названия
 		let safeTitle = noteTitle.replace(/[\\\/:*?"<>|']/g, "");
@@ -76,7 +76,7 @@ window.showPopupNewName = function(
 		}
 
 		if(safeTitle === "") {
-			showToast("Please, type the file name or click on cansel button.");
+			showToast("Please, type the file name or click on cancel button.");
 			return
 		}
 
@@ -85,7 +85,7 @@ window.showPopupNewName = function(
 		createFile(safeTitle, templatePath, targetFolder, url);
 	});
 
-	buttonCansel.addEventListener("click", () => {
+	buttonCancel.addEventListener("click", () => {
 		hideForm();
 	});
 
@@ -131,14 +131,14 @@ window.showPopupDeleteFile = function(
 	buttonOk.style.background = "var(--interactive-accent)";
 	buttonOk.style.fontWeight = "bold";
 
-	const buttonCansel = document.createElement("button");
-	buttonCansel.innerText = "Cansel";
-	buttonCansel.style.border = "1px solid rgba(0,0,0,0.2)";
-	buttonCansel.style.background = "var(--background-modifier-error)";
-	buttonCansel.style.fontWeight = "bold";
+	const buttonCancel = document.createElement("button");
+	buttonCancel.innerText = "Cancel";
+	buttonCancel.style.border = "1px solid rgba(0,0,0,0.2)";
+	buttonCancel.style.background = "var(--background-modifier-error)";
+	buttonCancel.style.fontWeight = "bold";
 
 	buttonContainer.appendChild(buttonOk);
-	buttonContainer.appendChild(buttonCansel);
+	buttonContainer.appendChild(buttonCancel);
 
 	form.appendChild(title);
 	form.appendChild(buttonContainer);
@@ -150,7 +150,7 @@ window.showPopupDeleteFile = function(
 		hideForm();
 	});
 
-	buttonCansel.addEventListener("click", () => {
+	buttonCancel.addEventListener("click", () => {
 		hideForm();
 	});
 
@@ -203,14 +203,14 @@ window.showPopupEditTranslate = function(
 	buttonEdit.style.background = "var(--interactive-accent)";
 	buttonEdit.style.fontWeight = "bold";
 
-	const buttonCansel = document.createElement("button");
-	buttonCansel.innerText = "Cansel";
-	buttonCansel.style.border = "1px solid rgba(0,0,0,0.2)";
-	buttonCansel.style.background = "var(--background-modifier-error)";
-	buttonCansel.style.fontWeight = "bold";
+	const buttonCancel = document.createElement("button");
+	buttonCancel.innerText = "Cancel";
+	buttonCancel.style.border = "1px solid rgba(0,0,0,0.2)";
+	buttonCancel.style.background = "var(--background-modifier-error)";
+	buttonCancel.style.fontWeight = "bold";
 
 	buttonContainer.appendChild(buttonEdit);
-	buttonContainer.appendChild(buttonCansel);
+	buttonContainer.appendChild(buttonCancel);
 
 	form.appendChild(title);
 	form.appendChild(inputName);
@@ -223,7 +223,7 @@ window.showPopupEditTranslate = function(
 		hideForm();
 	});
 
-	buttonCansel.addEventListener("click", () => {
+	buttonCancel.addEventListener("click", () => {
 		hideForm();
 	});
 
@@ -314,14 +314,14 @@ window.showPopupNewBook = function(
 	buttonSave.style.background = "var(--interactive-accent)";
 	buttonSave.style.fontWeight = "bold";
 
-	const buttonCansel = document.createElement("button");
-	buttonCansel.innerText = "Cansel";
-	buttonCansel.style.border = "1px solid rgba(0,0,0,0.2)";
-	buttonCansel.style.background = "var(--background-modifier-error)";
-	buttonCansel.style.fontWeight = "bold";
+	const buttonCancel = document.createElement("button");
+	buttonCancel.innerText = "Cancel";
+	buttonCancel.style.border = "1px solid rgba(0,0,0,0.2)";
+	buttonCancel.style.background = "var(--background-modifier-error)";
+	buttonCancel.style.fontWeight = "bold";
 
 	buttonContainer.appendChild(buttonSave);
-	buttonContainer.appendChild(buttonCansel);
+	buttonContainer.appendChild(buttonCancel);
 
 	form.appendChild(title);
 	form.appendChild(inputName);
@@ -366,7 +366,7 @@ window.showPopupNewBook = function(
 		hideForm();
 	});
 
-	buttonCansel.addEventListener("click", () => {
+	buttonCancel.addEventListener("click", () => {
 		hideForm();
 	});
 
@@ -411,20 +411,20 @@ window.showPopupBookNewChapter = function(
 	buttonSave.style.background = "var(--interactive-accent)";
 	buttonSave.style.fontWeight = "bold";
 
-	const buttonCansel = document.createElement("button");
-	buttonCansel.innerText = "Cansel";
-	buttonCansel.style.border = "1px solid rgba(0,0,0,0.2)";
-	buttonCansel.style.background = "var(--background-modifier-error)";
-	buttonCansel.style.fontWeight = "bold";
+	const buttonCancel = document.createElement("button");
+	buttonCancel.innerText = "Cancel";
+	buttonCancel.style.border = "1px solid rgba(0,0,0,0.2)";
+	buttonCancel.style.background = "var(--background-modifier-error)";
+	buttonCancel.style.fontWeight = "bold";
 
 	buttonContainer.appendChild(buttonSave);
-	buttonContainer.appendChild(buttonCansel);
+	buttonContainer.appendChild(buttonCancel);
 
 	form.appendChild(inputName);
 	form.appendChild(buttonContainer);
 
 	buttonSave.addEventListener("click", async () => {
-		const noteTitle = inputName.value.trim().trim();
+		const noteTitle = inputName.value.trim();
 		const date = getFormattedDate();
 
 		if(noteTitle === "") {
@@ -443,7 +443,7 @@ window.showPopupBookNewChapter = function(
 		createFile(safeTitle, templatePath, targetFolder, url);
 	});
 
-	buttonCansel.addEventListener("click", () => {
+	buttonCancel.addEventListener("click", () => {
 		hideForm();
 	});
 

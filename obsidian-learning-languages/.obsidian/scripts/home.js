@@ -176,7 +176,6 @@ window.createBookFile = async function(
 	// Подставляем переменные в основной файл
 	let noteContent = templateContent
 		.replace(/{{title}}/g, title)
-		.replace(/{{title}}/g, title)
 		.replace(/{{description}}/g, description);
 
 	// Создаём файл для 

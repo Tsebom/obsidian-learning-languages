@@ -21,7 +21,7 @@ target_language: ru
 > [!info] API_KEY: `INPUT[text:API_KEY]`
 > Устанавливает API key для Libretranslate.
 
-> [!info] Sourсe language: `INPUT[text:sourse_language]`
+> [!info] Source language: `INPUT[text:source_language]`
 > Изучаемый язык.
 
 > [!info] Target language: `INPUT[text:target_language]`

@@ -168,11 +168,6 @@ window.highlightRow = function(row) {
 // item: object[json] - объект слова
 window.createPartsOfSpeech = function(item = words[0]) {
 	const meanings = item?.definition?.meanings ?? [];
-
-	if (meanings.length === 0) {
-		return null;
-	}
-
 	return meanings;
 }
 
